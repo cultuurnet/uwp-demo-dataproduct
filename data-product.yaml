@@ -1,0 +1,88 @@
+apiVersion: be.ddtplatform/v1
+kind: DataProduct
+metadata:
+  name: "demo-dataproduct"  # Do not change this name.
+  namespace: "dp-be-publiq-demo"  # Do not change this namespace.
+spec:
+  summary: |          # A summary, describing the data product.
+    "Hello world" dataproduct als onboarding voorbeeld voor data product developers
+  domain: "be.publiq.demo"  # Do not change this domain. It is the domain owning the data project. This is a functional business domain often discovered using techniques from domain driven design.
+  termsOfUse:         #  The terms for using this data product and its data.
+    name: "Creative Commons Attribution 4.0 International"
+    uri: "https://creativecommons.org/licenses/by/4.0/legalcode.nl"
+  dataProductOwner:   # The owner of the data product. Contact this person for information about the business around the data product
+    name: "Stan Vertessen"
+    contact: "stan.vertessen@publiq.be"
+  responsibleTechnicalTeam:  # The technical team owning this data product and responsible for implementing, adapting, and deploying it. Contact this team for changes in requirements, feedback, technical issues, etc
+    name: "Stan Vertessen"
+    contact: "stan.vertessen@publiq.be"
+  transformer:
+    schedule: "0 */6 * * *"    # An optional CRON expression (in UTC timezone) for triggering the data transformation.
+  inputPorts:                  # One or multiple input ports through which the data product can consume data input.
+    - name: "myInputPortName"
+      environmentVariables:    # Zero or more environment variables that are made available in the transformer
+        envVariableSampleName: envVariableSampleValue
+        envVariableSampleName2: envVariableSampleValue2
+      secretEnvironmentVariables: # Zero or more secret values that are made available as environment variables in the transformer
+        envVariableSampleName3: nameOfAnEncryptedSecretValue
+
+      # Optional reference to output port of different data product. Transformer will be triggered when referenced data product finished transformation.
+      # outputPortRef:
+      #   dataProductDomain: <other-dp-domain-name>
+      #   dataProductName: <other-dp-name>
+      #   outputPort: <other-dp-output-port>
+
+  outputPorts:             # One or multiple output ports through which the data product provides its data. Add or remove output ports as needed.
+    - name: "myOutputPortName"
+      type: blobstore       # Allowed values: blobstore, linkeddata, analyticaldata, geodata
+      description: ""       # A description about this specific output port, how it differs from the other output ports, other granularity, ...
+      dataFormat:
+        description: ""         # A description about what files can be found, filetypes, naming conventions, ...
+        entityExample: ""       # An example of 1 entity (for example 1 line of a csv file)"
+        contentDescription: ""  # Description about the content of the files. When csv: what columns are present, when JSON: what is the JSON schema, ...
+
+    # - name: ""
+    #   type: linkeddata       # Allowed values: blobstore, linkeddata, analyticaldata, geodata
+    #   description: ""        # A description about this specific output port, how it differs from the other output ports, other granularity, ...
+    #   dataFormat:
+    #     description: ""                 # A description about the data format (for example: OSLO)
+    #     entityExample: ""               # An example of 1 entity"
+    #     linkedDataSchemaDefinition: ""  # An url to a shapes SHACL or inline
+
+    # - name: ""
+    #   type: analyticaldata  # Allowed values: blobstore, linkeddata, analyticaldata
+    #   description: ""       # A description about this specific output port, how it differs from the other output ports, other granularity, ...
+    #   dataFormat:
+    #     description: ""                   # A description about the data format
+    #     entityExample: ""                 # An example of 1 entity"
+    #     analyticalDataSchemaDefinition:   # A schema definition for analytical data. See https://ddt.atlassian.net/wiki/spaces/DDTC/pages/142540813/Analytical+Data
+    #       columnDefinitions:
+    #         - name: "field1"
+    #           type: "String"
+    #           nullable: "false"
+    #           default: "DEFAULT 'test'"
+    #           columnDescription: "a short column description"
+    #         - name: "field2"
+    #           type: "Float64"
+    #           nullable: "true"
+    #           default: "MATERIALIZED 'test'"
+    #         - name: "field3"
+    #           type: "Nested"
+    #           nullable: "false"
+    #           columnDefinitions:
+    #             - name: "field31"
+    #               type: "String"
+    #             - name: "field32"
+    #               type: "String"
+    #         - name: "field4"
+    #           type: "Array(String)"
+    #           nullable: "false"
+    #       primaryKey: "field1"
+    #       engine: "MergeTree"
+
+    #  - name: ""
+    #    type: geodata         # Allowed values: blobstore, linkeddata, analyticaldata, geodata
+    #    description: ""       # A description about this specific output port, how it differs from the other output ports, other granularity, ...
+    #    dataFormat:
+    #      description: ""         # A description about the geo/gis data that can be found in this port.
+    #      contentDescription: ""  # Description about the content of the data.
