@@ -1,7 +1,7 @@
 # Table of Contents
 - [Main Script](#main-script)
-  - [Features](#features)
-  - [Usage](#usage)
+    - [Features](#features)
+    - [Usage](#usage)
   - [Example Usage](#example-usage)
   - [Dependencies](#dependencies)
 - [Fuseki Client](#fuseki-client)
