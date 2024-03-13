@@ -1,0 +1,109 @@
+# Define namespace prefixes for commonly used ontologies
+prefixes:
+  ex: "http://www.example.com/"
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcterms: "http://purl.org/dc/terms/"
+  locn: "http://www.w3.org/ns/locn#"
+  loctype: "https://data.cultuurparticipatie.be/id/concept/Locatietype/"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  cidoc: "http://www.cidoc-crm.org/cidoc-crm/"
+  m8g: "http://data.europa.eu/m8g/"
+  schemas: "https://schema.org/"
+  prov: "https://www.w3.org/ns/prov#"
+  geosparql: "http://www.opengis.net/ont/geosparql#"
+  cp: "https://data.vlaanderen.be/ns/cultuurparticipatie#"
+  owl: "http://www.w3.org/2002/07/owl#"
+  adms: "http://www.w3.org/ns/adms#"
+  wegwijs: "https://data.vlaanderen.be/id/organisatie/"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  generiek: "https://data.vlaanderen.be/ns/generiek#"
+  platform: "https://data.uitwisselingsplatform.be/platform#"
+
+# Define the mapping rules
+mappings:
+
+  # Mapping for 'location' data
+  location:
+    # Define sources to extract data from JSON
+    sources:
+      - ['input-data/locatie_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/venue/$(location_id)
+    # Define subject mapping
+    s: https://data.example.org/venue/$(location_id)
+    # Define predicate-object mappings
+    po:
+      - [a, dcterms:Location] # Object is a dcterms:Location
+      - [dcterms:created, $(location_created), xsd:dateTime]
+      - [dcterms:modified, $(location_modified), xsd:dateTime]
+      - [platform:verwerktOp, $(location_processed), xsd:dateTime]
+      - [dcterms:title, $(location_name_nl), nl~lang]
+      - [dcterms:type, loctype:$(location_type)~iri]
+      - [locn:address, https://data.example.org/venue/$(location_id)#address~iri] # Predicate is locn:address
+      - [locn:geometry, https://data.example.org/venue/$(location_id)#geometry~iri]
+      - [adms:identifier, https://data.example.org/venue/$(location_id)#identifier~iri]
+
+
+  # Mapping for location 'identificator' data
+  locationIdentificator:
+    sources:
+      - ['input-data/locatie_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/venue/$(location_id)
+    # Define subject URI
+    s: https://data.example.org/venue/$(location_id)#identifier
+    # Define predicate-object mappings
+    po:
+      - [a, adms:Identifier] 
+      - [skos:notation, https://data.example.org/venue/$(location_id), xsd:anyURI]
+      - [dcterms:creator, https://data.vlaanderen.be/id/organisatie/OVO123456~iri]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/venue/$(location_id)#gestructureerdeIdentificator~iri]
+
+  # Mapping for location 'gestructureerdeIdentificator' data
+  locationGestructureerdeIdentificator:
+    sources:
+      - ['input-data/locatie_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/venue/$(location_id)
+    # Define subject URI
+    s: https://data.example.org/venue/$(location_id)#gestructureerdeIdentificator
+    # Define predicate-object mappings
+    po:
+      - [a, generiek:GestructureerdeIdentificator] 
+      - [generiek:naamruimte, https://data.example.org/venue/]
+      - [generiek:lokaleIdentificator, $(location_id)]
+
+  # Mapping for 'address' data
+  address:
+    # Define sources to extract data from JSON
+    sources:
+      - ['input-data/locatie_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/venue/$(location_id)
+    # Define subject URI
+    s: https://data.example.org/venue/$(location_id)#address
+    # Define predicate-object mappings
+    po:
+      - [a, locn:Address] # Object is a locn:Address
+      - [locn:postName, $(location_address_postName_nl), nl~lang]
+      - [locn:postcode, $(location_address_postcode)] 
+      - [locn:adminUnitL1, $(location_address_country)] 
+      - [locn:thoroughfare, $(location_address_street_nl), nl~lang]
+      - [locn:locatorDesignator, $(location_address_housenumber)]
+
+  # Mapping for 'geo' data
+  geo:
+    # Define sources to extract data from JSON
+    sources:
+      - ['input-data/locatie_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/venue/$(location_id)
+    # Define subject URI 
+    s: https://data.example.org/venue/$(location_id)#geometry
+    # Define predicate-object mappings
+    po:
+      - [a, locn:Geometry] 
+      - [m8g:latitude, $(location_geo_latitude)] 
+      - [m8g:longitude, $(location_geo_longitude)]

@@ -33,21 +33,21 @@ spec:
       #   outputPort: <other-dp-output-port>
 
   outputPorts:             # One or multiple output ports through which the data product provides its data. Add or remove output ports as needed.
-    - name: "myOutputPortName"
-      type: blobstore       # Allowed values: blobstore, linkeddata, analyticaldata, geodata
-      description: ""       # A description about this specific output port, how it differs from the other output ports, other granularity, ...
-      dataFormat:
-        description: ""         # A description about what files can be found, filetypes, naming conventions, ...
-        entityExample: ""       # An example of 1 entity (for example 1 line of a csv file)"
-        contentDescription: ""  # Description about the content of the files. When csv: what columns are present, when JSON: what is the JSON schema, ...
-
-    # - name: ""
-    #   type: linkeddata       # Allowed values: blobstore, linkeddata, analyticaldata, geodata
-    #   description: ""        # A description about this specific output port, how it differs from the other output ports, other granularity, ...
+    # - name: "myOutputPortName"
+    #   type: blobstore       # Allowed values: blobstore, linkeddata, analyticaldata, geodata
+    #   description: ""       # A description about this specific output port, how it differs from the other output ports, other granularity, ...
     #   dataFormat:
-    #     description: ""                 # A description about the data format (for example: OSLO)
-    #     entityExample: ""               # An example of 1 entity"
-    #     linkedDataSchemaDefinition: ""  # An url to a shapes SHACL or inline
+    #     description: ""         # A description about what files can be found, filetypes, naming conventions, ...
+    #     entityExample: ""       # An example of 1 entity (for example 1 line of a csv file)"
+    #     contentDescription: ""  # Description about the content of the files. When csv: what columns are present, when JSON: what is the JSON schema, ...
+
+    - name: "demosparql"
+      type: linkeddata       # Allowed values: blobstore, linkeddata, analyticaldata, geodata
+      description: "This outputport contains one or more sample entities as a result of demo transformation code for onboarding data product developers"        # A description about this specific output port, how it differs from the other output ports, other granularity, ...
+      dataFormat:
+        description: "RDF/OSLO compliant location example as described here: https://uitwisselingsplatform.atlassian.net/wiki/spaces/DDTC/pages/157908993/Locatie+dcterms+Location"                 # A description about the data format (for example: OSLO)
+        entityExample: "A dcterms:Location"               # An example of 1 entity"
+        linkedDataSchemaDefinition: ""  # An url to a shapes SHACL or inline
 
     # - name: ""
     #   type: analyticaldata  # Allowed values: blobstore, linkeddata, analyticaldata
