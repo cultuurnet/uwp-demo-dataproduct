@@ -43,11 +43,11 @@ The `main.py` script orchestrates the process of pushing data to a Fuseki server
 
 - **Transform YARRRML to RML**: The script first transforms a YARRRML mapping file to an RML file using the `transform_yarrrml_to_rml` function from the `rdf_utils` module.
 - **Push Data to Fuseki**: It then pushes data to the Fuseki server by performing the following steps:
-  1. **Retrieve Latest Modified Date**: Finds the latest modified date in the Fuseki database using the `get_latest_fuseki_update` function from the `fuseki_date_extraction` module.
-  2. **Compare Input Data**: Compares the input data (CSV file) with the latest modified date to determine if there are new entities to process.
-  3. **Generate RDF Graph**: Generates an RDF graph (N-Quads) from the CSV data using the `generate_rdf_graph` function from the `rdf_utils` module.
-  4. **Clear Existing Graphs**: Clears existing named entity graphs in the Fuseki server using the `clear_graphs` method of the `FusekiClient` class from the `fuseki_client` module.
-  5. **Load RDF Graph**: Loads the generated RDF graph (N-Quads) into the Fuseki server using the `load_store` method of the `FusekiClient` class.
+    1. **Retrieve Latest Modified Date**: Finds the latest modified date in the Fuseki database using the `get_latest_fuseki_update` function from the `fuseki_date_extraction` module.
+    2. **Compare Input Data**: Compares the input data (CSV file) with the latest modified date to determine if there are new entities to process.
+    3. **Generate RDF Graph**: Generates an RDF graph (N-Quads) from the CSV data using the `generate_rdf_graph` function from the `rdf_utils` module.
+    4. **Clear Existing Graphs**: Clears existing named entity graphs in the Fuseki server using the `clear_graphs` method of the `FusekiClient` class from the `fuseki_client` module.
+    5. **Load RDF Graph**: Loads the generated RDF graph (N-Quads) into the Fuseki server using the `load_store` method of the `FusekiClient` class.
 
 ## Usage
 
