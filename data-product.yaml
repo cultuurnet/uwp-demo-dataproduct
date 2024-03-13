@@ -17,7 +17,7 @@ spec:
     name: "Stan Vertessen"
     contact: "stan.vertessen@publiq.be"
   transformer:
-    schedule: "0 */6 * * *"    # An optional CRON expression (in UTC timezone) for triggering the data transformation.
+    schedule: #"0 */6 * * *"    # An optional CRON expression (in UTC timezone) for triggering the data transformation.
   inputPorts:                  # One or multiple input ports through which the data product can consume data input.
     - name: "myInputPortName"
       environmentVariables:    # Zero or more environment variables that are made available in the transformer
