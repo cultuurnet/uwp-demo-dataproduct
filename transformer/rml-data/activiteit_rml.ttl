@@ -8,7 +8,7 @@
 @prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#>.
 @prefix cidoc: <http://www.cidoc-crm.org/cidoc-crm/>.
 @prefix m8g: <http://data.europa.eu/m8g/>.
-@prefix schemas: <https://schema.org/>.
+@prefix schema: <https://schema.org/>.
 @prefix prov: <https://www.w3.org/ns/prov#>.
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#>.
 @prefix cp: <https://data.vlaanderen.be/ns/cultuurparticipatie#>.
@@ -18,6 +18,7 @@
 @prefix skos: <http://www.w3.org/2004/02/skos/core#>.
 @prefix generiek: <https://data.vlaanderen.be/ns/generiek#>.
 @prefix platform: <https://data.uitwisselingsplatform.be/platform#>.
+@prefix labeltype: <https://data.cultuurparticipatie.be/id/concept/LabelType/>.
 @prefix rr: <http://www.w3.org/ns/r2rml#>.
 @prefix rml: <http://semweb.mmlab.be/ns/rml#>.
 @prefix ql: <http://semweb.mmlab.be/ns/ql#>.
@@ -31,19 +32,19 @@
 @base <http://example.com/ns#>.
 
 
-<location_0> a rr:TriplesMap;
+<event_0> a rr:TriplesMap;
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "input-data/locatie_results.csv";
+		rml:source "input-data/activiteit_results.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
 		a rr:SubjectMap;
-		rr:template "https://data.example.org/venue/{location_id}";
+		rr:template "https://data.example.org/event/{activiteit_id}";
 		rr:graphMap [
 			a rr:GraphMap;
-			rr:template "https://data.example.org/venue/{location_id}";
+			rr:template "https://data.example.org/event/{activiteit_id}";
 		];
 	];
 	rr:predicateObjectMap [
@@ -53,7 +54,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:constant dcterms:Location;
+			rr:constant cidoc:E7_Activity;
 		];
 	];
 	rr:predicateObjectMap [
@@ -63,7 +64,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "location_created";
+			rml:reference "activiteit_creationdate";
 			rr:datatype xsd:dateTime
 		];
 	];
@@ -74,7 +75,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "location_modified";
+			rml:reference "activiteit_modifieddate";
 			rr:datatype xsd:dateTime
 		];
 	];
@@ -85,7 +86,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "location_processed";
+			rml:reference "activiteit_processedDate";
 			rr:datatype xsd:dateTime
 		];
 	];
@@ -96,7 +97,18 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "location_name_nl";
+			rml:reference "activiteit_name_nl";
+			rr:language "nl"
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant dcterms:description;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rml:reference "activiteit_description_nl";
 			rr:language "nl"
 		];
 	];
@@ -107,29 +119,18 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:template "https://data.cultuurparticipatie.be/id/concept/Locatietype/{location_type}";
+			rr:template "https://data.cultuurparticipatie.be/id/concept/ActiviteitType/{activiteit_type}";
 			rr:termType rr:IRI
 		];
 	];
 	rr:predicateObjectMap [
 		rr:predicateMap [
 			a rr:PredicateMap;
-			rr:constant locn:address;
+			rr:constant cp:thema;
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:template "https://data.example.org/venue/{location_id}#address";
-			rr:termType rr:IRI
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant locn:geometry;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rr:template "https://data.example.org/venue/{location_id}#geometry";
+			rr:template "https://data.cultuurparticipatie.be/id/concept/ThemaType/{activiteit_thema}";
 			rr:termType rr:IRI
 		];
 	];
@@ -140,25 +141,96 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:template "https://data.example.org/venue/{location_id}#identifier";
+			rr:constant <https://data.example.org/event/#identifier>;
+			rr:termType rr:IRI
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant cidoc:P4_has_time-span;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rr:constant <https://data.example.org/event/#period>;
+			rr:termType rr:IRI
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant prov:atLocation;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rr:template "http://example.org/location/{activiteit_location_id}";
 			rr:termType rr:IRI
 		];
 	].
 
 
-<locationIdentificator_0> a rr:TriplesMap;
+<period_0> a rr:TriplesMap;
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "input-data/locatie_results.csv";
+		rml:source "input-data/activiteit_results.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
 		a rr:SubjectMap;
-		rr:template "https://data.example.org/venue/{location_id}#identifier";
+		rr:template "https://data.example.org/event/{activiteit_id}#period";
 		rr:graphMap [
 			a rr:GraphMap;
-			rr:template "https://data.example.org/venue/{location_id}";
+			rr:template "https://data.example.org/event/{activiteit_id}";
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant rdf:type;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rr:constant m8g:PeriodOfTime;
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant m8g:startTime;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rml:reference "activiteit_startDate";
+			rr:datatype xsd:dateTime
+		];
+	];
+	rr:predicateObjectMap [
+		rr:predicateMap [
+			a rr:PredicateMap;
+			rr:constant m8g:endTime;
+		];
+		rr:objectMap [
+			a rr:ObjectMap;
+			rml:reference "activiteit_endDate";
+			rr:datatype xsd:dateTime
+		];
+	].
+
+
+<identificator_0> a rr:TriplesMap;
+
+	rml:logicalSource [
+		a rml:LogicalSource;
+		rml:source "input-data/activiteit_results.csv";
+		rml:referenceFormulation ql:CSV
+	];
+	rr:subjectMap [
+		a rr:SubjectMap;
+		rr:template "https://data.example.org/event/{activiteit_id}#identifier";
+		rr:graphMap [
+			a rr:GraphMap;
+			rr:template "https://data.example.org/event/{activiteit_id}";
 		];
 	];
 	rr:predicateObjectMap [
@@ -178,7 +250,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:template "https://data.example.org/venue/{location_id}";
+			rr:template "https://data.example.org/event/{activiteit_id}";
 			rr:datatype xsd:anyURI
 		];
 	];
@@ -189,7 +261,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:constant <https://data.vlaanderen.be/id/organisatie/OVO123456>;
+			rr:constant <https://data.vlaanderen.be/id/organisatie/OVO020353>;
 			rr:termType rr:IRI
 		];
 	];
@@ -200,25 +272,25 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:template "https://data.example.org/venue/{location_id}#gestructureerdeIdentificator";
+			rr:template "https://data.example.org/event/{activiteit_id}#gestructureerdeIdentificator";
 			rr:termType rr:IRI
 		];
 	].
 
 
-<locationGestructureerdeIdentificator_0> a rr:TriplesMap;
+<gestructureerdeIdentificator_0> a rr:TriplesMap;
 
 	rml:logicalSource [
 		a rml:LogicalSource;
-		rml:source "input-data/locatie_results.csv";
+		rml:source "input-data/activiteit_results.csv";
 		rml:referenceFormulation ql:CSV
 	];
 	rr:subjectMap [
 		a rr:SubjectMap;
-		rr:template "https://data.example.org/venue/{location_id}#gestructureerdeIdentificator";
+		rr:template "https://data.example.org/event/{activiteit_id}#gestructureerdeIdentificator";
 		rr:graphMap [
 			a rr:GraphMap;
-			rr:template "https://data.example.org/venue/{location_id}";
+			rr:template "https://data.example.org/event/{activiteit_id}";
 		];
 	];
 	rr:predicateObjectMap [
@@ -238,7 +310,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rr:constant <https://data.example.org/venue/>;
+			rr:constant <https://data.example.org/event/>;
 		];
 	];
 	rr:predicateObjectMap [
@@ -248,133 +320,7 @@
 		];
 		rr:objectMap [
 			a rr:ObjectMap;
-			rml:reference "location_id";
-		];
-	].
-
-
-<address_0> a rr:TriplesMap;
-
-	rml:logicalSource [
-		a rml:LogicalSource;
-		rml:source "input-data/locatie_results.csv";
-		rml:referenceFormulation ql:CSV
-	];
-	rr:subjectMap [
-		a rr:SubjectMap;
-		rr:template "https://data.example.org/venue/{location_id}#address";
-		rr:graphMap [
-			a rr:GraphMap;
-			rr:template "https://data.example.org/venue/{location_id}";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant rdf:type;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rr:constant locn:Address;
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant locn:postName;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "location_address_postName_nl";
-			rr:language "nl"
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant locn:postcode;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "location_address_postcode";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant locn:adminUnitL1;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "location_address_country";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant locn:thoroughfare;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "location_address_street_nl";
-			rr:language "nl"
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant locn:locatorDesignator;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "location_address_housenumber";
-		];
-	].
-
-
-<geo_0> a rr:TriplesMap;
-
-	rml:logicalSource [
-		a rml:LogicalSource;
-		rml:source "input-data/locatie_results.csv";
-		rml:referenceFormulation ql:CSV
-	];
-	rr:subjectMap [
-		a rr:SubjectMap;
-		rr:template "https://data.example.org/venue/{location_id}#geometry";
-		rr:graphMap [
-			a rr:GraphMap;
-			rr:template "https://data.example.org/venue/{location_id}";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant rdf:type;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rr:constant locn:Geometry;
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant m8g:latitude;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "location_geo_latitude";
-		];
-	];
-	rr:predicateObjectMap [
-		rr:predicateMap [
-			a rr:PredicateMap;
-			rr:constant m8g:longitude;
-		];
-		rr:objectMap [
-			a rr:ObjectMap;
-			rml:reference "location_geo_longitude";
+			rml:reference "activiteit_id";
 		];
 	].
 

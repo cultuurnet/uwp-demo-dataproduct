@@ -14,7 +14,45 @@ QUERY_LATEST_LOCATIE_DATE = """
     }
 """
 
+QUERY_LATEST_ACTIVITEIT_DATE = """
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX cidoc: <http://www.cidoc-crm.org/cidoc-crm/>
 
+    SELECT (MAX(?modified) AS ?mostRecentModifiedDate) WHERE {
+        GRAPH ?g {
+        ?s a cidoc:E7_Activity ;
+           dcterms:modified ?modified .
+        }
+    }
+"""
+
+QUERY_LATEST_PARTICIPANT_DATE = """
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX cidoc: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX cp: <https://data.vlaanderen.be/ns/cultuurparticipatie#>
+
+    SELECT (MAX(?modified) AS ?mostRecentModifiedDate) WHERE {
+        GRAPH ?g {
+        ?s a cp:Participant ;
+           dcterms:modified ?modified .
+        }
+    }
+"""
+
+QUERY_LATEST_DEELNAME_DATE = """
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX cidoc: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX cp: <https://data.vlaanderen.be/ns/cultuurparticipatie#>
+    PREFIX m8g: <http://data.europa.eu/m8g/>
+
+    SELECT (MAX(?modified) AS ?mostRecentModifiedDate) WHERE {
+        GRAPH ?g {
+        ?s a cp:Deelname ;
+           cp:Deelname.tijdstip ?period .
+        ?period m8g:startTime ?modified .
+        }
+    }
+"""
 
 @handle_errors
 @printer

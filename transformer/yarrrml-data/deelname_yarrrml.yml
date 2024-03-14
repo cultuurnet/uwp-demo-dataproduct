@@ -1,0 +1,104 @@
+prefixes:
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcterms: "http://purl.org/dc/terms/"
+  locn: "http://www.w3.org/ns/locn#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  wegwijs: "https://data.vlaanderen.be/id/organisatie/"
+  adms: "http://www.w3.org/ns/adms#"
+  generiek: "https://data.vlaanderen.be/ns/generiek#"
+  platform: "https://data.uitwisselingsplatform.be/platform#"
+  cp: "https://data.vlaanderen.be/ns/cultuurparticipatie#"
+  m8g: "http://data.europa.eu/m8g/"
+
+# Define the mapping rules
+mappings:
+
+  # Mapping for 'deelname' data
+  deelname:
+    # Define sources to extract data
+    sources:
+      - ['input-data/deelname_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participation/$(deelname_id)
+    # Define subject mapping
+    s: https://data.example.org/participation/$(deelname_id)
+    # Define predicate-object mappings
+    po:
+      - [a, cp:Deelname]
+      - [cp:Deelname.tijdstip, https://data.example.org/participation/$(deelname_id)#tijdstip]
+      - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/DeelnameType/bezoeker~iri]
+      - [cp:Deelname.participant, https://data.publiq.be/participant/$(participant_id)~iri]
+      - [cp:Deelname.activiteit, https://data.publiq.be/events/$(event_id)~iri]
+      - [cp:Deelname.inputVoor, https://data.publiq.be/participantProfiel/$(deelname_id)]
+  
+  # Mapping for 'tijdstip' data
+  tijdstip:
+    sources:
+      - ['input-data/deelname_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participation/$(deelname_id)
+    # Define subject mapping
+    s: https://data.example.org/participation/$(deelname_id)#tijdstip
+    # Define predicate-object mappings
+    po:
+      - [a, m8g:PeriodOfTime] 
+      - [m8g:startTime, $(deelname_modifieddate), xsd:dateTime]
+
+  # Mapping for 'participant Profiel' data
+  participantProfiel:
+    sources:
+      - ['input-data/deelname_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participation/$(deelname_id)
+    # Define subject mapping
+    s: https://data.publiq.be/participantProfiel/$(deelname_id)
+    # Define predicate-object mappings
+    po:
+      - [a, cp:ParticipantProfiel] 
+      - [cp:ParticipantProfiel.algemeenKenmerk, https://data.publiq.be/participantProfiel/$(deelname_id)#algemeenKenmerk~iri]
+      - [cp:ParticipantProfiel.sociodemografisch, https://data.publiq.be/participantProfiel/$(deelname_id)#sociodemografisch~iri]
+      - [cp:ParticipantProfiel.cultureel, https://data.publiq.be/participantProfiel/$(deelname_id)#cultuurdeelname~iri]
+
+  # Mapping for 'AlgemeenParticipantKenmerk' data
+  algemeenParticipantKenmerk:
+    sources:
+      - ['input-data/deelname_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participation/$(deelname_id)
+    # Define subject mapping
+    s: https://data.publiq.be/participantProfiel/$(deelname_id)#algemeenKenmerk
+    # Define predicate-object mappings
+    po:
+      - [a, cp:AlgemeenParticipantKenmerk] 
+      - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/ParticipantType/natuurlijkPersoon~iri]
+  
+  # Mapping for 'SociodemografischKenmerk' data
+  sociodemografischKenmerk:
+    sources:
+      - ['input-data/deelname_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participation/$(deelname_id)
+    # Define subject mapping
+    s: https://data.publiq.be/participantProfiel/$(deelname_id)#sociodemografisch
+    # Define predicate-object mappings
+    po:
+      - [a, cp:SociodemografischKenmerk]
+      - [platform:geboortejaar, $(participant_birthYear), xsd:gYear]
+      - [platform:statistischeSector, $(participant_statSectorId)]
+  
+  # Mapping for 'Cultuurdeelname' data
+  cultuurdeelname:
+    sources:
+      - ['input-data/deelname_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participation/$(deelname_id)
+    # Define subject mapping
+    s: https://data.publiq.be/participantProfiel/$(deelname_id)#cultuurdeelname
+    # Define predicate-object mappings
+    po:
+      - [a, cp:Cultuurdeelname]
+      - [cp:Cultuurdeelname.themaActiviteit, https://data.cultuurparticipatie.be/id/concept/ThemaType/$(event_theme)~iri]
+      - [cp:Cultuurdeelname.typeActiviteit, https://data.cultuurparticipatie.be/id/concept/ActiviteitType/$(event_type)~iri]

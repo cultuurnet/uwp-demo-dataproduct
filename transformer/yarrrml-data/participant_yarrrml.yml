@@ -1,0 +1,63 @@
+prefixes:
+  cp: "https://data.vlaanderen.be/ns/cultuurparticipatie#"
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcterms: "http://purl.org/dc/terms/"
+  locn: "http://www.w3.org/ns/locn#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  wegwijs: "https://data.vlaanderen.be/id/organisatie/"
+  adms: "http://www.w3.org/ns/adms#"
+  generiek: "https://data.vlaanderen.be/ns/generiek#"
+  platform: "https://data.uitwisselingsplatform.be/platform#"
+
+# Define the mapping rules
+mappings:
+
+  # Mapping for 'participants' data
+  participant:
+    # Define sources to extract data
+    sources:
+      - ['input-data/participant_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participant/$(participant_id)
+    # Define subject mapping
+    s: https://data.example.org/participant/$(participant_id)
+    # Define predicate-object mappings
+    po:
+      - [a, cp:Participant]
+      - [dcterms:created, $(participant_creationdate), xsd:dateTime]
+      - [dcterms:modified, $(participant_modifieddate), xsd:dateTime]
+      - [adms:identifier, https://data.example.org/participant/$(participant_id)#identifier]
+      - [platform:geboortejaar, $(birthYear), xsd:gYear]
+      - [platform:statistischeSector, $(statSectPlaceholder)]
+  
+  # Mapping for 'identificator' data
+  identificator:
+    sources:
+      - ['input-data/participant_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participant/$(participant_id)
+    # Define subject URI
+    s: https://data.example.org/participant/$(participant_id)#identifier
+    # Define predicate-object mappings
+    po:
+      - [a, adms:Identifier] 
+      - [skos:notation, https://data.example.org/participant/$(participant_id), xsd:anyURI]
+      - [dcterms:creator, wegwijs:OVO026559~iri]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/participant/$(participant_id)#gestructureerdeIdentificator]
+
+  # Mapping for 'gestructureerdeIdentificator' data
+  gestructureerdeIdentificator:
+    sources:
+      - ['input-data/participant_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participant/$(participant_id)
+    # Define subject URI
+    s: https://data.example.org/participant/$(participant_id)#gestructureerdeIdentificator
+    # Define predicate-object mappings
+    po:
+      - [a, generiek:GestructureerdeIdentificator] 
+      - [generiek:naamruimte, https://data.example.org/participant/]
+      - [generiek:lokaleIdentificator, $(participant_id)]

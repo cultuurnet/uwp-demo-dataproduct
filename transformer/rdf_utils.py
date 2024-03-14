@@ -2,6 +2,8 @@ import logging
 import yatter
 from ruamel.yaml import YAML
 import morph_kgc
+from rdflib import Graph, plugin
+from rdflib.serializer import Serializer
 
 
 def transform_yarrrml_to_rml(input_yarrrml_path: str, output_rml_path: str) -> bool:

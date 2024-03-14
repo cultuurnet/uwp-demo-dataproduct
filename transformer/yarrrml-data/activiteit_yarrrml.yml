@@ -1,0 +1,90 @@
+prefixes:
+  ex: "http://www.example.com/"
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcterms: "http://purl.org/dc/terms/"
+  locn: "http://www.w3.org/ns/locn#"
+  loctype: "https://data.cultuurparticipatie.be/id/concept/Locatietype/"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  cidoc: "http://www.cidoc-crm.org/cidoc-crm/"
+  m8g: "http://data.europa.eu/m8g/"
+  schema: "https://schema.org/"
+  prov: "https://www.w3.org/ns/prov#"
+  geosparql: "http://www.opengis.net/ont/geosparql#"
+  cp: "https://data.vlaanderen.be/ns/cultuurparticipatie#"
+  owl: "http://www.w3.org/2002/07/owl#"
+  adms: "http://www.w3.org/ns/adms#"
+  wegwijs: "https://data.vlaanderen.be/id/organisatie/"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  generiek: "https://data.vlaanderen.be/ns/generiek#"
+  platform: "https://data.uitwisselingsplatform.be/platform#"
+  labeltype: "https://data.cultuurparticipatie.be/id/concept/LabelType/"
+  
+
+mappings:
+  event:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/event/$(activiteit_id)
+    # Define subject mapping
+    s: https://data.example.org/event/$(activiteit_id)
+    # Define predicate-object mappings
+    po:
+      - [a, cidoc:E7_Activity]
+      - [dcterms:created, $(activiteit_creationdate), xsd:dateTime]
+      - [dcterms:modified, $(activiteit_modifieddate), xsd:dateTime]
+      - [platform:verwerktOp, $(activiteit_processedDate), xsd:dateTime]
+      - [dcterms:title, $(activiteit_name_nl), nl~lang]
+      - [dcterms:description, $(activiteit_description_nl), nl~lang]
+      - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/ActiviteitType/$(activiteit_type)~iri]
+      - [cp:thema, https://data.cultuurparticipatie.be/id/concept/ThemaType/$(activiteit_thema)~iri]
+      - [adms:identifier, https://data.example.org/event/#identifier~iri]
+      - [cidoc:P4_has_time-span, https://data.example.org/event/#period~iri]
+      - [prov:atLocation, http://example.org/location/$(activiteit_location_id)~iri]
+
+    
+
+  # Mapping for 'period' data
+  period:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/event/$(activiteit_id)
+    # Define subject mapping
+    s: https://data.example.org/event/$(activiteit_id)#period
+    # Define predicate-object mappings
+    po:
+      - [a, m8g:PeriodOfTime] 
+      - [m8g:startTime, $(activiteit_startDate), xsd:dateTime]
+      - [m8g:endTime, $(activiteit_endDate), xsd:dateTime]
+
+# Mapping for event 'identificator' data
+  identificator:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/event/$(activiteit_id)
+    # Define subject URI
+    s: https://data.example.org/event/$(activiteit_id)#identifier
+    # Define predicate-object mappings
+    po:
+      - [a, adms:Identifier] 
+      - [skos:notation, https://data.example.org/event/$(activiteit_id), xsd:anyURI]
+      - [dcterms:creator, https://data.vlaanderen.be/id/organisatie/OVO020353~iri]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/event/$(activiteit_id)#gestructureerdeIdentificator~iri]
+
+  # Mapping for event 'gestructureerdeIdentificator' data
+  gestructureerdeIdentificator:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/event/$(activiteit_id)
+    # Define subject URI
+    s: https://data.example.org/event/$(activiteit_id)#gestructureerdeIdentificator
+    # Define predicate-object mappings
+    po:
+      - [a, generiek:GestructureerdeIdentificator] 
+      - [generiek:naamruimte, https://data.example.org/event/]
+      - [generiek:lokaleIdentificator, $(activiteit_id)]

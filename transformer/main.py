@@ -2,15 +2,15 @@ import logging
 from fuseki_client import FusekiClient
 from fuseki_date_extraction import (
     get_latest_fuseki_update,
-    QUERY_LATEST_LOCATIE_DATE,
+    QUERY_LATEST_DEELNAME_DATE,
 )
 from rdf_utils import generate_rdf_graph, transform_yarrrml_to_rml
 from csv_utils import compare_input_with_latest_date
 from constants import (
     FUSEKI_OUTPUT_PORT_NAME,
-    LOCATIE_OUTPUT_RML_PATH,
-    LOCATIE_TYPE,
-    LOCATIE_YARRRML_PATH,
+    DEELNAME_OUTPUT_RML_PATH,
+    DEELNAME_TYPE,
+    DEELNAME_YARRRML_PATH,
 )
 
 
@@ -21,13 +21,14 @@ logging.basicConfig(level=logging.INFO, force=True)
 
 def push_data(data_type, latest_update_fuseki_query):
     fuseki_client = FusekiClient(FUSEKI_OUTPUT_PORT_NAME)
-    output_csv_path = "input-data/locatie_results.csv"
+    input_csv_path = f"""input-data/{data_type}_results.csv"""
     config_ini = f"""[CONFIGURATION]
+                output_file=output-data/{data_type}_kg.nq
                 output_format=N-QUADS
 
                 [DataSource1]
-                mappings: output-data/{data_type}_rml.ttl
-                file_path: {output_csv_path}
+                mappings=rml-data/{data_type}_rml.ttl
+                file_path={input_csv_path}
                 """
 
     previous_latest_date = ""
@@ -38,7 +39,7 @@ def push_data(data_type, latest_update_fuseki_query):
         )
 
         # Check if input data has new entities to process
-        compare_input_with_latest_date(output_csv_path, latest_date)
+        compare_input_with_latest_date(input_csv_path, latest_date, data_type)
 
         # Step 3: Generate RDF graph (n-quads) from CSV (found in `file_path`) using morph-kgc
         graph_store = generate_rdf_graph(config_ini)
@@ -51,5 +52,5 @@ def push_data(data_type, latest_update_fuseki_query):
 
 
 if __name__ == "__main__":
-    transform_yarrrml_to_rml(LOCATIE_YARRRML_PATH, LOCATIE_OUTPUT_RML_PATH)
-    push_data(LOCATIE_TYPE, QUERY_LATEST_LOCATIE_DATE)
+    transform_yarrrml_to_rml(DEELNAME_YARRRML_PATH, DEELNAME_OUTPUT_RML_PATH)
+    push_data(DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE)
