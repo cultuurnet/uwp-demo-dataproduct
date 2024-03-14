@@ -58,17 +58,17 @@ The `main.py` script orchestrates the process of pushing data to a Fuseki server
 ## Example Usage
 
 ```bash
-python main.py
+python3 main.py
 ```
 
 ## Dependencies
 
 - `logging`: Standard library module for logging.
 - `FusekiClient`: Custom client class for interacting with the Fuseki server.
-- `get_latest_fuseki_update`: Function for retrieving the latest modified date from the Fuseki database.
+- `get_latest_fuseki_update`: Function for retrieving the latest modified date from the Fuseki database for each specific entity type.
 - `transform_yarrrml_to_rml`: Function for transforming YARRRML to RML.
 - `generate_rdf_graph`: Function for generating an RDF graph from CSV data.
-- `compare_input_with_latest_date`: Function for comparing input data timestamps with the latest modified date.
+- `compare_input_with_latest_date`: Function for comparing input data timestamps with the latest modified date in Fuseki.
 - `constants`: Module containing constant values used in the script.
 
 # Fuseki Client
