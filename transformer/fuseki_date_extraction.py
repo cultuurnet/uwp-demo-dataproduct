@@ -56,14 +56,14 @@ QUERY_LATEST_DEELNAME_DATE = """
 
 @handle_errors
 @printer
-def get_latest_fuseki_update(FusekiClient, query: str) -> str:
+def get_latest_fuseki_update(FusekiClient, query: str, data_type) -> str:
     """
     Connects to a Fuseki database and retrieves the latest update datetime.
     If the database is empty, then return: 1990-01-01T00:00:00+02:00.
     """
     raw_most_recent_date = extract_most_recent_date(FusekiClient, query)
     most_recent_date = transform_datetime(raw_most_recent_date)
-    logging.info(f"Most recent date in Fuseki store: {most_recent_date}")
+    logging.info(f"Most recent date in Fuseki store for {data_type}: {most_recent_date}")
     return most_recent_date
 
 

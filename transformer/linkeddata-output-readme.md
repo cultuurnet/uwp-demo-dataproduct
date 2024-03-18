@@ -1,13 +1,13 @@
 # Local output location
 The output data is available at the following locations:
- - outputPortName:     http://localhost:3030 in dataset "domain.dataProductName.outputPortName". Just use any username when redirected to the OpenID login page
+    - outputPortName:     http://localhost:3030 in dataset "domain.dataProductName.outputPortName". Just use any username when redirected to the OpenID login page
 
 # SPARQL Queries
 ## Expose the full vocabulary of a graph
 
 Graph pattern: return all predicates and objects for subjects that are a 'type':
-- if the object is of type IRI, bind "Resource predicate" to the pType variable
-- if not, bind "Literal predicate" to the pType variable
+    - if the object is of type IRI, bind "Resource predicate" to the pType variable
+    - if not, bind "Literal predicate" to the pType variable
 
 ```
 SELECT DISTINCT ?t ?p ?pType
@@ -53,11 +53,33 @@ WHERE {
 ```
 
 ## List all graphs
+The following query returns a list of graph_uri values that can be used to dive deeper in the specific graph details or remove a specific graph (see below)
 
 ```
 SELECT DISTINCT ?g
 WHERE {
   GRAPH ?g {
+    ?s ?p ?o
+  }
+}
+```
+
+## Describe a specific graph in n-triples
+The following query constructs a new graph with all subjects, predicates and objects from the specified graph_uri in the WHERE clause.
+
+It is interesting to visualize the resulting n-triples response as a graph, using an online tool like [rdf-grapher](https://www.ldf.fi/service/rdf-grapher) : 
+    1. copy the n-triples from the query response
+    2. paste them as RDF data in the input field
+    3. Specify From format as N-Triples
+    4. Specify To format
+    5. Visualize
+
+```
+CONSTRUCT {
+  ?s ?p ?o
+}
+WHERE {
+  GRAPH <graph_uri> {
     ?s ?p ?o
   }
 }
