@@ -48,7 +48,7 @@ def push_data(data_type, latest_update_fuseki_query):
             fuseki_client, latest_update_fuseki_query, data_type
         )
 
-        # Check if input data has new entities to process
+        # Step 2: Check if input data has new entities to process
         if compare_input_date_with_latest_date(input_csv_path, latest_date, data_type) or latest_date == previous_latest_date :
             # Stop condition met, move to the next data type
             break
@@ -67,10 +67,10 @@ def push_data(data_type, latest_update_fuseki_query):
 
 if __name__ == "__main__":
     transform_yarrrml_to_rml(LOCATIE_YARRRML_PATH, LOCATIE_OUTPUT_RML_PATH)
-    transform_yarrrml_to_rml(ACTIVITEIT_YARRRML_PATH, ACTIVITEIT_OUTPUT_RML_PATH)
-    transform_yarrrml_to_rml(DEELNAME_YARRRML_PATH, DEELNAME_OUTPUT_RML_PATH)
-    transform_yarrrml_to_rml(PARTICIPANT_YARRRML_PATH, PARTICIPANT_OUTPUT_RML_PATH)
+    # transform_yarrrml_to_rml(ACTIVITEIT_YARRRML_PATH, ACTIVITEIT_OUTPUT_RML_PATH)
+    # transform_yarrrml_to_rml(DEELNAME_YARRRML_PATH, DEELNAME_OUTPUT_RML_PATH)
+    # transform_yarrrml_to_rml(PARTICIPANT_YARRRML_PATH, PARTICIPANT_OUTPUT_RML_PATH)
     push_data(LOCATIE_TYPE, QUERY_LATEST_LOCATIE_DATE)
-    push_data(ACTIVITEIT_TYPE, QUERY_LATEST_ACTIVITEIT_DATE)
-    push_data(DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE)
-    push_data(PARTICIPANT_TYPE, QUERY_LATEST_PARTICIPANT_DATE)
+    # push_data(ACTIVITEIT_TYPE, QUERY_LATEST_ACTIVITEIT_DATE)
+    # push_data(DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE)
+    # push_data(PARTICIPANT_TYPE, QUERY_LATEST_PARTICIPANT_DATE)
