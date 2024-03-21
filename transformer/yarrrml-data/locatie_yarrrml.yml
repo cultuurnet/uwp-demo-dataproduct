@@ -88,7 +88,7 @@ mappings:
     po:
       - [a, locn:Address] # Object is a locn:Address
       - [locn:postName, $(location_address_postName_nl), nl~lang]
-      - [locn:postcode, $(location_address_postcode)] 
+      - [locn:postcode, $(location_address_postcode)]
       - [locn:adminUnitL1, $(location_address_country)] 
       - [locn:thoroughfare, $(location_address_street_nl), nl~lang]
       - [locn:locatorDesignator, $(location_address_housenumber)]
