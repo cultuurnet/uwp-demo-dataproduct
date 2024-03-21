@@ -20,11 +20,7 @@ spec:
     schedule: #"0 */6 * * *"    # An optional CRON expression (in UTC timezone) for triggering the data transformation.
   inputPorts:                  # One or multiple input ports through which the data product can consume data input.
     - name: "myInputPortName"
-      environmentVariables:    # Zero or more environment variables that are made available in the transformer
-        envVariableSampleName: envVariableSampleValue
-        envVariableSampleName2: envVariableSampleValue2
-      secretEnvironmentVariables: # Zero or more secret values that are made available as environment variables in the transformer
-        envVariableSampleName3: nameOfAnEncryptedSecretValue
+      
 
       # Optional reference to output port of different data product. Transformer will be triggered when referenced data product finished transformation.
       # outputPortRef:
