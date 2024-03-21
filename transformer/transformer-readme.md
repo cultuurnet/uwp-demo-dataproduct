@@ -56,9 +56,9 @@ The `main.py` script orchestrates the process of pushing data to a Fuseki server
 3. Run the `main.py` script.
 
 ## Example Usage
-
+Run the main.py script using the CLI tool with:
 ```bash
-python3 main.py
+dp run
 ```
 
 ## Dependencies
@@ -211,7 +211,7 @@ The `generate_rdf_graph` function generates an RDF graph based on the provided c
 from rdf_utils import transform_yarrrml_to_rml, generate_rdf_graph
 
 # Transform YARRRML to RML
-input_yarrrml_path = "input.yarrrml"
+input_yarrrml_path = "input.yaml"
 output_rml_path = "output.rml"
 transform_successful = transform_yarrrml_to_rml(input_yarrrml_path, output_rml_path)
 if transform_successful:
