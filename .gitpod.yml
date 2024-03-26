@@ -1,0 +1,28 @@
+image: gitpod/workspace-full:latest
+tasks:
+  - before: sdk install java 17.0.4.1-tem < /dev/null
+  - name: initialize
+    init: |
+      mkdir -p .vscode
+      mkdir -p ~/.local/bin/
+      echo '{"python.defaultInterpreterPath": "/home/gitpod/micromamba/envs/env/bin/python"}' > .vscode/settings.json
+      curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C ~/.local/ bin/micromamba
+      ~/.local/bin/micromamba shell init -s bash -p ~/micromamba
+      source ~/.bashrc
+      micromamba create -n dataproduct -c defaults python=3.11
+      micromamba activate dataproduct   
+
+    command: |
+      micromamba activate dataproduct
+
+  - name: Install dataproduct CLI
+    init: |
+      wget -O cli.zip "https://repository.uitwisselingsplatform.be/service/rest/v1/search/assets/download?repository=ddt-public-releases&group=be.ddtplatform&name=data-product-cli&sort=version&prerelease=false&maven.extension=zip"
+      unzip "cli.zip"
+      cd "dp-cli-installer"
+      bash "installer-mac-linux.sh"
+      cd ..
+      rm -rf "wget-log" "cli.zip" "dp-cli-installer"
+
+      
+
