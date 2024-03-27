@@ -9,7 +9,7 @@ tasks:
       curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C ~/.local/ bin/micromamba
       ~/.local/bin/micromamba shell init -s bash -p ~/micromamba
       source ~/.bashrc
-      micromamba create -n dataproduct -c defaults python=3.11
+      micromamba create -n dataproduct -c defaults python=3.11 -y
       micromamba activate dataproduct   
 
     command: |
