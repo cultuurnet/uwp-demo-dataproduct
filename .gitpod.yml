@@ -25,7 +25,7 @@ tasks:
       chmod 777 -R /home/gitpod/.ddt/dp/data/fuseki
     command: |
       echo "
-      ** Waiting until Java and Micromamba have finished installing, please wait a few moments... **"
+      ** Waiting until Java and Micromamba have finished installing, this can take up to a minute so please wait a few moments... **"
       gp sync-await mm
       eval "$(micromamba shell hook --shell bash)"
       micromamba activate dataproduct
