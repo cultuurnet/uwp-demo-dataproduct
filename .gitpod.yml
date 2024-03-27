@@ -23,6 +23,7 @@ tasks:
       bash "installer-mac-linux.sh"
       cd ..
       rm -rf "wget-log" "cli.zip" "dp-cli-installer"
+      chmod 777 -R /home/gitpod/.ddt/dp/data/fuseki
 
       
 
