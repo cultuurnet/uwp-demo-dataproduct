@@ -11,6 +11,7 @@ tasks:
       source ~/.bashrc
       micromamba create -n dataproduct -c defaults python=3.11 -y
       micromamba activate dataproduct   
+    command: |
       gp sync-done mm
 
   - name: Install dataproduct CLI
