@@ -1,7 +1,7 @@
 # demo data product
 
 <p align="center">
-  <a href="https://gitpod.io/from-referrer/">
+  <a href="https://gitpod.io/#https://bitbucket.org/cjsm/demo-dataproduct-9f1ad6510aa76f5a/src/0164272c34ee1a8e9bf44b0488f2d97e1b99d6b6/?at=feature%2Ftry-gitpod">
     <img src="https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod" alt="Gitpod ready-to-code" />
   </a>
 </p>
