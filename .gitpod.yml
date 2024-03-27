@@ -7,7 +7,7 @@ tasks:
       mkdir -p ~/.local/bin/
       echo '{"python.defaultInterpreterPath": "/home/gitpod/micromamba/envs/env/bin/python"}' > .vscode/settings.json
       curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj -C ~/.local/ bin/micromamba
-      ~/.local/bin/micromamba shell init -s bash -p ~/micromamba
+      ~/.local/bin/micromamba shell init -s bash -p ~/micromamba -y
       source ~/.bashrc
       micromamba create -n dataproduct -c defaults python=3.11 -y
       micromamba activate dataproduct   
