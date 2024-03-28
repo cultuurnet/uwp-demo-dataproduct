@@ -13,6 +13,7 @@ tasks:
       micromamba activate dataproduct  
       service docker start 
     command: |
+      eval "$(micromamba shell hook --shell bash)"
       gp sync-done mm
 
   - name: Install dataproduct CLI
