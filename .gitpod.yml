@@ -2,7 +2,7 @@ image: gitpod/workspace-full:latest
 tasks:
   - before: sdk install java 17.0.4.1-tem < /dev/null
   - name: initialize
-    init: |
+    command: |
       mkdir -p .vscode
       mkdir -p ~/.local/bin/
       echo '{"python.defaultInterpreterPath": "/home/gitpod/micromamba/envs/env/bin/python"}' > .vscode/settings.json
@@ -12,9 +12,9 @@ tasks:
       micromamba create -n dataproduct -c defaults python=3.11 -y
       micromamba activate dataproduct  
       service docker start 
-    command: |
       eval "$(micromamba shell hook --shell bash)"
       gp sync-done mm
+  
 
   - name: Install dataproduct CLI
     init: |
