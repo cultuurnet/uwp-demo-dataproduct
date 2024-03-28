@@ -10,7 +10,8 @@ tasks:
       ~/.local/bin/micromamba shell init -s bash -p ~/micromamba -y
       source ~/.bashrc
       micromamba create -n dataproduct -c defaults python=3.11 -y
-      micromamba activate dataproduct   
+      micromamba activate dataproduct  
+      service docker start 
     command: |
       gp sync-done mm
 
