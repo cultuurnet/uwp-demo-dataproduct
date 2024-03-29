@@ -44,9 +44,9 @@ def get_httpx_client(fuseki_output_port_name: str) -> OAuth2Client:
     Returns an authenticated httpx client for the Fuseki server.
     """
     # Add OIDC security to the 'httpx' Python HTTP client
-    token_url = get_environment_variable(f'OUTPUT.{fuseki_output_port_name}.AUTH_TOKEN_URL')
-    client_id = get_environment_variable(f'OUTPUT.{fuseki_output_port_name}.AUTH_CLIENT_ID')
-    client_secret = get_environment_variable(f'OUTPUT.{fuseki_output_port_name}.AUTH_CLIENT_SECRET')
+    token_url = get_environment_variable(f'OUTPUT_{fuseki_output_port_name}_AUTH_TOKEN_URL')
+    client_id = get_environment_variable(f'OUTPUT_{fuseki_output_port_name}_AUTH_CLIENT_ID')
+    client_secret = get_environment_variable(f'OUTPUT_{fuseki_output_port_name}_AUTH_CLIENT_SECRET')
     client = get_oauth_client(client_id, client_secret)
     configure_oauth_security(token_url)
     client.fetch_token(token_url)
@@ -56,8 +56,8 @@ def get_fuseki_base_endpoint(fuseki_output_port_name: str) -> str:
     """
     Returns the url of the Fuseki server.
     """
-    fuseki_url = get_environment_variable(f"OUTPUT.{fuseki_output_port_name}.URL")
-    fuseki_dataset = get_environment_variable(f"OUTPUT.{fuseki_output_port_name}.DATASET")
+    fuseki_url = get_environment_variable(f"OUTPUT_{fuseki_output_port_name}_URL")
+    fuseki_dataset = get_environment_variable(f"OUTPUT_{fuseki_output_port_name}_DATASET")
     return f"{fuseki_url}/{fuseki_dataset}"
 
 def refresh_token(self) -> OAuth2Client:
