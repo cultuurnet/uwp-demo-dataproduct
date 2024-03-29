@@ -16,8 +16,8 @@ tasks:
       gp sync-done mm
   
 
-  - name: Install dataproduct CLI
-    init: |
+  - name: Install dataproduct CLI     
+    command: |
       wget -O cli.zip "https://repository.uitwisselingsplatform.be/service/rest/v1/search/assets/download?repository=ddt-public-releases&group=be.ddtplatform&name=data-product-cli&sort=version&prerelease=false&maven.extension=zip"
       unzip "cli.zip"
       cd "dp-cli-installer"
@@ -26,7 +26,6 @@ tasks:
       rm -rf "wget-log" "cli.zip" "dp-cli-installer"
       mkdir -p /home/gitpod/.ddt/dp/data/fuseki
       chmod 777 -R /home/gitpod/.ddt/dp/data/fuseki
-    command: |
       echo "
       ** Waiting until Java and Micromamba have finished installing, this can take up to a minute so please wait a few moments... **"
       gp sync-await mm
