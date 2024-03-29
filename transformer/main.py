@@ -33,12 +33,12 @@ logging.basicConfig(level=logging.INFO, force=True)
 
 def push_data(data_type, latest_update_fuseki_query):
     fuseki_client = FusekiClient(FUSEKI_OUTPUT_PORT_NAME)
-    input_csv_path = f"""temp/input-data/{data_type}_results.csv"""
+    input_csv_path = f"""input-data/{data_type}_results.csv"""
     config_ini = f"""[CONFIGURATION]
                 output_format=N-QUADS
 
                 [DataSource1]
-                mappings=temp/rml-data/{data_type}_rml.ttl
+                mappings=/tmp/{data_type}_rml.ttl
                 """
 
     previous_latest_date = ""
@@ -66,11 +66,11 @@ def push_data(data_type, latest_update_fuseki_query):
 
 
 if __name__ == "__main__":
-    transform_yarrrml_to_rml(LOCATIE_YARRRML_PATH, LOCATIE_OUTPUT_RML_PATH)
-    # transform_yarrrml_to_rml(ACTIVITEIT_YARRRML_PATH, ACTIVITEIT_OUTPUT_RML_PATH)
-    # transform_yarrrml_to_rml(DEELNAME_YARRRML_PATH, DEELNAME_OUTPUT_RML_PATH)
-    # transform_yarrrml_to_rml(PARTICIPANT_YARRRML_PATH, PARTICIPANT_OUTPUT_RML_PATH)
+    transform_yarrrml_to_rml(LOCATIE_YARRRML_PATH, LOCATIE_TYPE)
+    transform_yarrrml_to_rml(ACTIVITEIT_YARRRML_PATH, ACTIVITEIT_TYPE)
+    transform_yarrrml_to_rml(DEELNAME_YARRRML_PATH, DEELNAME_TYPE)
+    transform_yarrrml_to_rml(PARTICIPANT_YARRRML_PATH, PARTICIPANT_TYPE)
     push_data(LOCATIE_TYPE, QUERY_LATEST_LOCATIE_DATE)
-    # push_data(ACTIVITEIT_TYPE, QUERY_LATEST_ACTIVITEIT_DATE)
-    # push_data(DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE)
-    # push_data(PARTICIPANT_TYPE, QUERY_LATEST_PARTICIPANT_DATE)
+    push_data(ACTIVITEIT_TYPE, QUERY_LATEST_ACTIVITEIT_DATE)
+    push_data(DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE)
+    push_data(PARTICIPANT_TYPE, QUERY_LATEST_PARTICIPANT_DATE)
