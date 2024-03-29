@@ -14,10 +14,10 @@ ACTIVITEIT_YARRRML_PATH = TRANSFORMER_ROOT + "/yarrrml-data/activiteit_yarrrml.y
 DEELNAME_YARRRML_PATH = TRANSFORMER_ROOT + "/yarrrml-data/deelname_yarrrml.yml"
 PARTICIPANT_YARRRML_PATH = TRANSFORMER_ROOT + "/yarrrml-data/participant_yarrrml.yml"
 # the location of the automatically generated RML file by the transform_yarrrml_to_rml function
-LOCATIE_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/rml-data/locatie_rml.ttl"
-ACTIVITEIT_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/rml-data/activiteit_rml.ttl"
-DEELNAME_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/rml-data/deelname_rml.ttl"
-PARTICIPANT_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/rml-data/participant_rml.ttl"
+LOCATIE_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/temp/rml-data/locatie_rml.ttl"
+ACTIVITEIT_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/temp/rml-data/activiteit_rml.ttl"
+DEELNAME_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/temp/rml-data/deelname_rml.ttl"
+PARTICIPANT_OUTPUT_RML_PATH = TRANSFORMER_ROOT + "/temp/rml-data/participant_rml.ttl"
 # the output port name as declared in the data-product.yml used to store rdf data in fuseki
 FUSEKI_OUTPUT_PORT_NAME = "demosparql"
 

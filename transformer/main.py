@@ -33,12 +33,12 @@ logging.basicConfig(level=logging.INFO, force=True)
 
 def push_data(data_type, latest_update_fuseki_query):
     fuseki_client = FusekiClient(FUSEKI_OUTPUT_PORT_NAME)
-    input_csv_path = f"""input-data/{data_type}_results.csv"""
+    input_csv_path = f"""temp/input-data/{data_type}_results.csv"""
     config_ini = f"""[CONFIGURATION]
                 output_format=N-QUADS
 
                 [DataSource1]
-                mappings=rml-data/{data_type}_rml.ttl
+                mappings=temp/rml-data/{data_type}_rml.ttl
                 """
 
     previous_latest_date = ""
