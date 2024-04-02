@@ -2,7 +2,7 @@ rdflib==6.3.2
 requests==2.28.2
 pandas==2.0.0
 yatter==1.1.2
-morph_kgc==2.6.4
+morph_kgc==2.7.0
 
 # HTTPX and OAuth authentication
 oauthlib==3.2.2
