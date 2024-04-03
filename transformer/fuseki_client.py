@@ -139,7 +139,7 @@ class FusekiClient:
             drop_statements = "\n".join(f"DROP GRAPH {graph_uri};" for graph_uri in dataset.named_graphs())
 
             # Log or print the drop statements
-            logging.debug(f"Drop statements:\n{drop_statements}")
+            logging.info(f"Drop statements:\n{drop_statements}")
 
             clear_endpoint = f"{self.base_endpoint}/update"
             headers = {
