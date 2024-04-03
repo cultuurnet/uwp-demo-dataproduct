@@ -30,9 +30,9 @@ mappings:
       - [a, cp:Deelname]
       - [cp:Deelname.tijdstip, https://data.example.org/participation/$(deelname_id)#tijdstip]
       - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/DeelnameType/bezoeker~iri]
-      - [cp:Deelname.participant, https://data.publiq.be/participant/$(participant_id)~iri]
-      - [cp:Deelname.activiteit, https://data.publiq.be/events/$(event_id)~iri]
-      - [cp:Deelname.inputVoor, https://data.publiq.be/participantProfiel/$(deelname_id)]
+      - [cp:Deelname.participant, https://data.example.org/participant/$(participant_id)~iri]
+      - [cp:Deelname.activiteit, https://data.example.org/event/$(event_id)~iri]
+      - [cp:Deelname.inputVoor, https://data.example.org/participantProfiel/$(deelname_id)]
   
   # Mapping for 'tijdstip' data
   tijdstip:

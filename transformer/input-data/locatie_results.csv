@@ -1,2 +1,2 @@
 locatie_createddate,locatie_modifieddate,location_id,location_name_nl,location_address_street_nl,location_address_housenumber,location_address_postcode,location_address_postName_nl,location_address_country,location_geo_latitude,location_geo_longitude,location_type,locatie_processeddate
-2010-01-11T22:13:39+01:00,2024-04-05T17:52:17+02:00,787d7420-c06f-4935-b3c5-5cd5a1276796,Ancienne Belgique,Anspachlaan,110,1000,Brussel,BE,50.8472409,4.3488349,monument,2024-03-06T00:02:17+00:00
+2010-01-11T22:13:39+01:00,2024-06-05T17:52:17+02:00,787d7420-c06f-4935-b3c5-5cd5a1276796,Ancienne Belgique - name UPDATE,Anspachlaan,110,1000,Brussel,BE,50.8472409,4.3488349,monument,2024-03-06T00:02:17+00:00

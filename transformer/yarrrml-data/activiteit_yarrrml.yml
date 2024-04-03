@@ -40,9 +40,9 @@ mappings:
       - [dcterms:description, $(activiteit_description_nl), nl~lang]
       - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/ActiviteitType/$(activiteit_type)~iri]
       - [cp:thema, https://data.cultuurparticipatie.be/id/concept/ThemaType/$(activiteit_thema)~iri]
-      - [adms:identifier, https://data.example.org/event/#identifier~iri]
-      - [cidoc:P4_has_time-span, https://data.example.org/event/#period~iri]
-      - [prov:atLocation, http://example.org/location/$(activiteit_location_id)~iri]
+      - [adms:identifier, https://data.example.org/event/$(activiteit_id)#identifier~iri]
+      - [cidoc:P4_has_time-span, https://data.example.org/event/$(activiteit_id)#period~iri]
+      - [prov:atLocation, https://data.example.org/venue/$(activiteit_location_id)~iri]
 
     
 
