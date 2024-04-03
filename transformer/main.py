@@ -7,22 +7,14 @@ from fuseki_date_extraction import (
     QUERY_LATEST_PARTICIPANT_DATE,
     QUERY_LATEST_DEELNAME_DATE,
 )
-from rdf_utils import generate_rdf_graph, transform_yarrrml_to_rml
+from rdf_utils import generate_rdf_graph
 from csv_utils import compare_input_date_with_latest_date
 from constants import (
     FUSEKI_OUTPUT_PORT_NAME,
-    LOCATIE_OUTPUT_RML_PATH,
     LOCATIE_TYPE,
-    LOCATIE_YARRRML_PATH,
-    ACTIVITEIT_OUTPUT_RML_PATH,
     ACTIVITEIT_TYPE,
-    ACTIVITEIT_YARRRML_PATH,
-    DEELNAME_OUTPUT_RML_PATH,
     DEELNAME_TYPE,
-    DEELNAME_YARRRML_PATH,
-    PARTICIPANT_OUTPUT_RML_PATH,
     PARTICIPANT_TYPE,
-    PARTICIPANT_YARRRML_PATH,
 )
 
 
@@ -38,7 +30,7 @@ def push_data(data_type, latest_update_fuseki_query):
                 output_format=N-QUADS
 
                 [DataSource1]
-                mappings=/tmp/{data_type}_rml.ttl
+                mappings=yarrrml-data/{data_type}_yarrrml.yml
                 """
 
     previous_latest_date = ""
@@ -66,10 +58,6 @@ def push_data(data_type, latest_update_fuseki_query):
 
 
 if __name__ == "__main__":
-    transform_yarrrml_to_rml(LOCATIE_YARRRML_PATH, LOCATIE_TYPE)
-    transform_yarrrml_to_rml(ACTIVITEIT_YARRRML_PATH, ACTIVITEIT_TYPE)
-    transform_yarrrml_to_rml(DEELNAME_YARRRML_PATH, DEELNAME_TYPE)
-    transform_yarrrml_to_rml(PARTICIPANT_YARRRML_PATH, PARTICIPANT_TYPE)
     push_data(LOCATIE_TYPE, QUERY_LATEST_LOCATIE_DATE)
     push_data(ACTIVITEIT_TYPE, QUERY_LATEST_ACTIVITEIT_DATE)
     push_data(DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE)
