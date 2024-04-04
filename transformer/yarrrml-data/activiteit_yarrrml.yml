@@ -72,7 +72,8 @@ mappings:
     po:
       - [a, adms:Identifier] 
       - [skos:notation, https://data.example.org/event/$(activiteit_id), xsd:anyURI]
-      - [dcterms:creator, https://data.vlaanderen.be/id/organisatie/OVO020353~iri]
+      - [dcterms:creator, https://data.vlaanderen.be/id/organisatie/OVO003887~iri]
+      - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
       - [generiek:gestructureerdeIdentificator, https://data.example.org/event/$(activiteit_id)#gestructureerdeIdentificator~iri]
 
   # Mapping for event 'gestructureerdeIdentificator' data

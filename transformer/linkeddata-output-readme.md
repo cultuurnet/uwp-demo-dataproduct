@@ -65,21 +65,22 @@ WHERE {
 ```
 
 ## Describe a specific graph in n-triples
-The following query constructs a new graph with all subjects, predicates and objects from the specified graph_uri in the WHERE clause.
+The following query constructs a new unified graph with all subjects, predicates and objects from the individual graphs in the WHERE clause.
 
-It is interesting to visualize the resulting n-triples response as a graph, using an online tool like [rdf-grapher](https://www.ldf.fi/service/rdf-grapher) : 
+It is interesting to visualize the resulting n-triples response as a connected graph, using an online tool like [rdf-grapher](https://www.ldf.fi/service/rdf-grapher) : 
 1. copy the n-triples from the query response
 2. paste them as RDF data in the input field
 3. Specify From format as N-Triples
 4. Specify To format
-5. Visualize
+5. Send form as HTTP POST 
+6. Visualize
 
 ```
 CONSTRUCT {
   ?s ?p ?o
 }
 WHERE {
-  GRAPH <graph_uri> {
+  GRAPH ?g {
     ?s ?p ?o
   }
 }
@@ -98,4 +99,11 @@ Manually delete a created graph to rerun the transformation code for that entity
 
 ```
 DROP GRAPH <graph_uri>
+```
+
+## Delete all data
+Clear all graphs and triples in the Fuseki dataset
+
+```
+DROP ALL
 ```
