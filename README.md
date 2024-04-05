@@ -10,13 +10,11 @@
 
 Dit demo dataproduct wordt gebruikt in de [Data Product developer onboarding documentatie](https://uitwisselingsplatform.atlassian.net/wiki/spaces/DDTC/pages/380076045/Demo+dataproduct+opzetten) van het UiTwisselingsplatform.
 
-Deze repo wordt door publiq onderhouden in [Bitbucket](https://bitbucket.org/cjsm/cultuurparticipatie-metadata-2f6bfff6f96aafe9/src/master/).
+Deze repo wordt door publiq onderhouden in [Bitbucket](https://bitbucket.org/cjsm/demo-dataproduct-9f1ad6510aa76f5a/src/master/).
 
 Changes op deze repository moeten manueel gesynct worden met de [publieke github repo](https://github.com/cultuurnet/uwp-demo-dataproduct). 
 
 Technische documentatie over deze sync staat in de private [confluence van publiq](https://confluence.publiq.be/display/DDT/Demo+dataproduct%3A+sync+bitbucket+to+github)
-
-Instructies om je data product te publiceren kun je [hier](https://ddt.atlassian.net/wiki/spaces/DDTC/pages/141557829/Getting+Started) vinden.
 
 ## Werking transformatie code
 
