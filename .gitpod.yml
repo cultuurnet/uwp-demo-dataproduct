@@ -18,11 +18,12 @@ tasks:
 
   - name: Install dataproduct CLI     
     command: |
-      unzip "dp-cli-installer.zip"
+      wget -O cli.zip "https://repository.uitwisselingsplatform.be/service/rest/v1/search/assets/download?repository=ddt-public-releases&group=be.ddtplatform&name=data-product-cli&sort=version&prerelease=false&maven.extension=zip"
+      unzip "cli.zip"
       cd "dp-cli-installer"
       bash "installer-mac-linux.sh"
       cd ..
-      rm -rf "wget-log" "dp-cli-installer"
+      rm -rf "wget-log" "cli.zip" "dp-cli-installer"
       mkdir -p /home/gitpod/.ddt/dp/data/fuseki
       chmod 777 -R /home/gitpod/.ddt/dp/data/fuseki
       echo "
@@ -30,5 +31,3 @@ tasks:
       gp sync-await mm
       eval "$(micromamba shell hook --shell bash)"
       micromamba activate dataproduct
-      
-
