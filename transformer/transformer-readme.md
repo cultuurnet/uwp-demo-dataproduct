@@ -66,7 +66,6 @@ dp run
 - `logging`: Standard library module for logging.
 - `FusekiClient`: Custom client class for interacting with the Fuseki server.
 - `get_latest_fuseki_update`: Function for retrieving the latest modified date from the Fuseki database for each specific entity type.
-- `transform_yarrrml_to_rml`: Function for transforming YARRRML to RML.
 - `generate_rdf_graph`: Function for generating an RDF graph from CSV data.
 - `compare_input_with_latest_date`: Function for comparing input data timestamps with the latest modified date in Fuseki.
 - `constants`: Module containing constant values used in the script.
@@ -109,7 +108,7 @@ The `FusekiClient` provides error handling for various scenarios, such as invali
 ## Example Usage
 
 ```python
-from fuseki_client import FusekiClient
+from tools.fuseki_client import FusekiClient
 
 # Initialize the FusekiClient with authentication credentials
 client = FusekiClient(output_port_name="fuseki_output_port")
@@ -164,7 +163,7 @@ The `transform_datetime` function converts datetime strings from the Fuseki data
 ## Example Usage
 
 ```python
-from fuseki_date_extraction import get_latest_fuseki_update
+from tools.fuseki_date_extraction import get_latest_fuseki_update
 
 # Initialize Fuseki client and query
 fuseki_client = FusekiClient(...)
@@ -186,20 +185,15 @@ print(f"Latest update datetime: {latest_date}")
 
 # RDF Utilities
 
-The `rdf_utils.py` module provides functions for working with RDF data, including transforming YARRRML mappings to RML mappings and generating RDF graphs.
+The `rdf_utils.py` module provides the function for generating RDF graphs using morph-kgc mapping engine.
 
 ## Features
 
-- **YARRRML to RML Transformation**: Transforms YARRRML mappings to RML mappings using the `yatter` library.
 - **RDF Graph Generation**: Generates an RDF graph from a configuration file using the `morph_kgc` library.
 
 ## Usage
 
 To use the functions in `rdf_utils.py`, you need to provide input files or configuration details as required. Then, you can call the functions to perform the desired RDF-related operations.
-
-### YARRRML to RML Transformation
-
-The `transform_yarrrml_to_rml` function takes a YARRRML file as input and transforms it to an RML file using the `yatter` library. The resulting RML file is saved to the specified output path.
 
 ### RDF Graph Generation
 
@@ -208,16 +202,7 @@ The `generate_rdf_graph` function generates an RDF graph based on the provided c
 ## Example Usage
 
 ```python
-from rdf_utils import transform_yarrrml_to_rml, generate_rdf_graph
-
-# Transform YARRRML to RML
-input_yarrrml_path = "input.yaml"
-output_rml_path = "output.rml"
-transform_successful = transform_yarrrml_to_rml(input_yarrrml_path, output_rml_path)
-if transform_successful:
-    print("YARRRML to RML transformation successful.")
-else:
-    print("YARRRML to RML transformation failed.")
+from tools.rdf_utils import generate_rdf_graph
 
 # Generate RDF graph
 config_ini_path = "config.ini"
@@ -228,8 +213,6 @@ print("RDF graph generated successfully.")
 ## Dependencies
 
 - `logging`: Standard library module for logging messages.
-- `yatter`: External library for transforming YARRRML to RML.
-- `ruamel.yaml`: External library for parsing YAML files.
 - `morph_kgc`: External library for generating RDF graphs.
 
 # CSV Utilities
@@ -247,7 +230,7 @@ You can use the `compare_input_with_latest_date` function to compare timestamps 
 ## Example Usage
 
 ```python
-from csv_utils import compare_input_with_latest_date
+from tools.csv_utils import compare_input_with_latest_date
 
 # Specify the path to the CSV file and the latest date
 output_csv_path = "output.csv"
