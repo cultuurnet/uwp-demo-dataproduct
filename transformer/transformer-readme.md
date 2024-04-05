@@ -24,7 +24,6 @@
 - [RDF Utilities](#rdf-utilities)
 	- [Features](#features-3)
 	- [Usage](#usage-3)
-		- [YARRRML to RML Transformation](#yarrrml-to-rml-transformation)
 		- [RDF Graph Generation](#rdf-graph-generation)
 	- [Example Usage](#example-usage-3)
 	- [Dependencies](#dependencies-3)
