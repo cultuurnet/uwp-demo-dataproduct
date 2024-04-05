@@ -1,15 +1,15 @@
 import logging
-from fuseki_client import FusekiClient
-from fuseki_date_extraction import (
+from tools.fuseki_client import FusekiClient
+from tools.fuseki_date_extraction import (
     get_latest_fuseki_update,
     QUERY_LATEST_LOCATIE_DATE,
     QUERY_LATEST_ACTIVITEIT_DATE,
     QUERY_LATEST_PARTICIPANT_DATE,
     QUERY_LATEST_DEELNAME_DATE,
 )
-from rdf_utils import generate_rdf_graph
-from csv_utils import compare_input_date_with_latest_date
-from constants import (
+from tools.rdf_utils import generate_rdf_graph
+from tools.csv_utils import compare_input_date_with_latest_date
+from tools.constants import (
     FUSEKI_OUTPUT_PORT_NAME,
     LOCATIE_TYPE,
     ACTIVITEIT_TYPE,

@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import logging
-from tools import handle_errors, printer
+from tools.tools import handle_errors, printer
 
 
 QUERY_LATEST_LOCATIE_DATE = """
