@@ -16,7 +16,6 @@ Changes op deze repository moeten manueel gesynct worden met de [publieke github
 
 Technische documentatie over deze sync staat in de private [confluence van publiq](https://confluence.publiq.be/display/DDT/Demo+dataproduct%3A+sync+bitbucket+to+github)
 
-Instructies om je data product te publiceren kun je [hier](https://ddt.atlassian.net/wiki/spaces/DDTC/pages/141557829/Getting+Started) vinden.
 
 ## Werking transformatie code
 
