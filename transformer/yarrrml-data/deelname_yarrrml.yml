@@ -9,7 +9,7 @@ prefixes:
   wegwijs: "https://data.vlaanderen.be/id/organisatie/"
   adms: "http://www.w3.org/ns/adms#"
   generiek: "https://data.vlaanderen.be/ns/generiek#"
-  platform: "https://data.uitwisselingsplatform.be/platform#"
+  platform: "https://data.uitwisselingsplatform.be/ns/platform#"
   cp: "https://data.vlaanderen.be/ns/cultuurparticipatie#"
   m8g: "http://data.europa.eu/m8g/"
 

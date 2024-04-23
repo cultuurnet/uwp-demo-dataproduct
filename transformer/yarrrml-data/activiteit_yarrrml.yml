@@ -18,7 +18,7 @@ prefixes:
   wegwijs: "https://data.vlaanderen.be/id/organisatie/"
   skos: "http://www.w3.org/2004/02/skos/core#"
   generiek: "https://data.vlaanderen.be/ns/generiek#"
-  platform: "https://data.uitwisselingsplatform.be/platform#"
+  platform: "https://data.uitwisselingsplatform.be/ns/platform#"
   labeltype: "https://data.cultuurparticipatie.be/id/concept/LabelType/"
   
 
