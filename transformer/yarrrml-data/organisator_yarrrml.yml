@@ -1,0 +1,101 @@
+prefixes:
+  cp: "https://data.vlaanderen.be/ns/cultuurparticipatie#"
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcterms: "http://purl.org/dc/terms/"
+  locn: "http://www.w3.org/ns/locn#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  wegwijs: "https://data.vlaanderen.be/id/organisatie/"
+  adms: "http://www.w3.org/ns/adms#"
+  generiek: "https://data.vlaanderen.be/ns/generiek#"
+  platform: "https://data.uitwisselingsplatform.be/platform#"
+  foaf: "http://xmlns.com/foaf/0.1/"
+
+# Define the mapping rules
+mappings:
+
+  # Mapping for 'participants' data
+  participant:
+    # Define sources to extract data
+    sources:
+      - ['input-data/organisator_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/organizer/$(organisator_id)
+    # Define subject mapping
+    s: https://data.example.org/organizer/$(organisator_id)
+    # Define predicate-object mappings
+    po:
+      - [a, cp:Organisator]
+      - [dcterms:created, $(organisator_creationdate), xsd:dateTime]
+      - [dcterms:modified, $(organisator_modifieddate), xsd:dateTime]
+      - [platform:verwerktOp, $(organisator_processeddate), xsd:dateTime]
+      - [adms:identifier, https://data.example.org/organizer/$(organisator_id)#identifier]
+      - [cp:Realisator.naam, $(organisator_name_nl), nl~lang]
+      - [foaf:homepage, $(organisator_homepage)]
+      - [locn:address, https://data.example.org/organizer/$(organisator_id)#address~iri]
+      
+  
+  # Mapping for 'identificator' data
+  identificator:
+    sources:
+      - ['input-data/organisator_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/organizer/$(organisator_id)
+    # Define subject URI
+    s: https://data.example.org/organizer/$(organisator_id)#identifier
+    # Define predicate-object mappings
+    po:
+      - [a, adms:Identifier] 
+      - [skos:notation, https://data.example.org/organizer/$(organisator_id), xsd:anyURI]
+      - [dcterms:creator, https://data.vlaanderen.be/id/organisatie/OVO003887~iri]
+      - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/organizer/$(organisator_id)#gestructureerdeIdentificator]
+
+  # Mapping for 'gestructureerdeIdentificator' data
+  gestructureerdeIdentificator:
+    sources:
+      - ['input-data/organisator_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/organizer/$(organisator_id)
+    # Define subject URI
+    s: https://data.example.org/organizer/$(organisator_id)#gestructureerdeIdentificator
+    # Define predicate-object mappings
+    po:
+      - [a, generiek:GestructureerdeIdentificator] 
+      - [generiek:naamruimte, https://data.example.org/organizer/]
+      - [generiek:lokaleIdentificator, $(organisator_id)]
+
+# Mapping for 'address' data
+address:
+  # Define sources to extract data from JSON
+  sources:
+    - ['input-data/organisator_results.csv~csv']
+  # Define graph name
+  graph: https://data.example.org/organizer/$(organisator_id)
+  # Define subject URI
+  s: https://data.example.org/organizer/$(organisator_id)#address
+  # Define predicate-object mappings
+  po:
+    - [a, locn:Address] # Object is a locn:Address
+    - [locn:postName, $(organisator_address_postName_nl), nl~lang]
+    - [locn:postcode, $(organisator_address_postcode)]
+    - [locn:adminUnitL1, $(organisator_address_country)] 
+    - [locn:thoroughfare, $(organisator_address_street_nl), nl~lang]
+    - [locn:locatorDesignator, $(organisator_address_housenumber)]
+
+# Mapping for 'geo' data
+geo:
+  # Define sources to extract data from JSON
+  sources:
+    - ['input-data/organisator_results.csv~csv']
+  # Define graph name
+  graph: https://data.example.org/organizer/$(organisator_id)
+  # Define subject URI 
+  s: https://data.example.org/organizer/$(organisator_id)#geometry
+  # Define predicate-object mappings
+  po:
+    - [a, locn:Geometry] 
+    - [m8g:latitude, $(organisator_geo_latitude)] 
+    - [m8g:longitude, $(organisator_geo_longitude)]
