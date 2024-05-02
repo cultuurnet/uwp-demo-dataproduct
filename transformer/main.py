@@ -7,6 +7,7 @@ from tools.fuseki_date_extraction import (
     QUERY_LATEST_PARTICIPANT_DATE,
     QUERY_LATEST_DEELNAME_DATE,
     QUERY_LATEST_ORGANISATOR_DATE,
+    QUERY_LATEST_UITVOERDER_DATE,
 )
 from tools.rdf_utils import generate_rdf_graph
 from tools.csv_utils import compare_input_date_with_latest_date
@@ -17,6 +18,7 @@ from tools.constants import (
     DEELNAME_TYPE,
     PARTICIPANT_TYPE,
     ORGANISATOR_TYPE,
+    UITVOERDER_TYPE,
 )
 
 
@@ -65,3 +67,4 @@ if __name__ == "__main__":
     push_data(DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE)
     push_data(PARTICIPANT_TYPE, QUERY_LATEST_PARTICIPANT_DATE)
     push_data(ORGANISATOR_TYPE, QUERY_LATEST_ORGANISATOR_DATE)
+    push_data(UITVOERDER_TYPE, QUERY_LATEST_UITVOERDER_DATE)
