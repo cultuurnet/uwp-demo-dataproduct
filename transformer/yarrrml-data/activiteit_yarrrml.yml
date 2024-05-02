@@ -43,8 +43,8 @@ mappings:
       - [adms:identifier, https://data.example.org/event/$(activiteit_id)#identifier~iri]
       - [cidoc:P4_has_time-span, https://data.example.org/event/$(activiteit_id)#period~iri]
       - [prov:atLocation, https://data.example.org/venue/$(activiteit_location_id)~iri]
+      - [cidoc:P14_carried_out_by, https://data.example.org/organizer/$(activiteit_organizer_id)~iri]
 
-    
 
   # Mapping for 'period' data
   period:

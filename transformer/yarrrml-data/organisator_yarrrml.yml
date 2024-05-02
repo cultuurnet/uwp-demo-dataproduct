@@ -12,6 +12,7 @@ prefixes:
   generiek: "https://data.vlaanderen.be/ns/generiek#"
   platform: "https://data.uitwisselingsplatform.be/platform#"
   foaf: "http://xmlns.com/foaf/0.1/"
+  m8g: "http://data.europa.eu/m8g/"
 
 # Define the mapping rules
 mappings:
@@ -34,7 +35,8 @@ mappings:
       - [adms:identifier, https://data.example.org/organizer/$(organisator_id)#identifier]
       - [cp:Realisator.naam, $(organisator_name_nl), nl~lang]
       - [foaf:homepage, $(organisator_homepage)]
-      - [locn:address, https://data.example.org/organizer/$(organisator_id)#address~iri]
+      - [locn:address, https://data.example.org/organizer/$(organisator_id)#address]
+      - [locn:geometry, https://data.example.org/organizer/$(organisator_id)#geometry]
       
   
   # Mapping for 'identificator' data
@@ -67,35 +69,35 @@ mappings:
       - [generiek:naamruimte, https://data.example.org/organizer/]
       - [generiek:lokaleIdentificator, $(organisator_id)]
 
-# Mapping for 'address' data
-address:
-  # Define sources to extract data from JSON
-  sources:
-    - ['input-data/organisator_results.csv~csv']
-  # Define graph name
-  graph: https://data.example.org/organizer/$(organisator_id)
-  # Define subject URI
-  s: https://data.example.org/organizer/$(organisator_id)#address
-  # Define predicate-object mappings
-  po:
-    - [a, locn:Address] # Object is a locn:Address
-    - [locn:postName, $(organisator_address_postName_nl), nl~lang]
-    - [locn:postcode, $(organisator_address_postcode)]
-    - [locn:adminUnitL1, $(organisator_address_country)] 
-    - [locn:thoroughfare, $(organisator_address_street_nl), nl~lang]
-    - [locn:locatorDesignator, $(organisator_address_housenumber)]
+  # Mapping for 'address' data
+  address:
+    # Define sources to extract data from JSON
+    sources:
+      - ['input-data/organisator_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/organizer/$(organisator_id)
+    # Define subject URI
+    s: https://data.example.org/organizer/$(organisator_id)#address
+    # Define predicate-object mappings
+    po:
+      - [a, locn:Address] # Object is a locn:Address
+      - [locn:postName, $(organisator_address_postname_nl), nl~lang]
+      - [locn:postcode, $(organisator_address_postcode)]
+      - [locn:adminUnitL1, $(organisator_address_country)] 
+      - [locn:thoroughfare, $(organisator_address_street_nl), nl~lang]
+      - [locn:locatorDesignator, $(organisator_address_housenumber)]
 
-# Mapping for 'geo' data
-geo:
-  # Define sources to extract data from JSON
-  sources:
-    - ['input-data/organisator_results.csv~csv']
-  # Define graph name
-  graph: https://data.example.org/organizer/$(organisator_id)
-  # Define subject URI 
-  s: https://data.example.org/organizer/$(organisator_id)#geometry
-  # Define predicate-object mappings
-  po:
-    - [a, locn:Geometry] 
-    - [m8g:latitude, $(organisator_geo_latitude)] 
-    - [m8g:longitude, $(organisator_geo_longitude)]
+  # Mapping for 'geo' data
+  geo:
+    # Define sources to extract data from JSON
+    sources:
+      - ['input-data/organisator_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/organizer/$(organisator_id)
+    # Define subject URI 
+    s: https://data.example.org/organizer/$(organisator_id)#geometry
+    # Define predicate-object mappings
+    po:
+      - [a, locn:Geometry] 
+      - [m8g:latitude, $(organisator_geo_latitude)] 
+      - [m8g:longitude, $(organisator_geo_longitude)]
