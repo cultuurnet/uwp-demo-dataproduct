@@ -1,0 +1,83 @@
+prefixes:
+  cp: "https://data.vlaanderen.be/ns/cultuurparticipatie#"
+  cpp: "https://data.vlaanderen.be/ns/cultuurparticipatie#Uitvoerder."
+  ex: "https://data.organization.be/ns/#"
+  rdf: "http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  rdfs: "http://www.w3.org/2000/01/rdf-schema#"
+  xsd: "http://www.w3.org/2001/XMLSchema#"
+  dcterms: "http://purl.org/dc/terms/"
+  locn: "http://www.w3.org/ns/locn#"
+  grel: "http://users.ugent.be/~bjdmeest/function/grel.ttl#"
+  skos: "http://www.w3.org/2004/02/skos/core#"
+  wegwijs: "https://data.vlaanderen.be/id/organisatie/"
+  adms: "http://www.w3.org/ns/adms#"
+  generiek: "https://data.vlaanderen.be/ns/generiek#"
+  platform: "https://data.uitwisselingsplatform.be/platform#"
+  schema: "https://schema.org/"
+
+# Define the mapping rules
+mappings:
+
+  # Mapping for 'participants' data
+  uitvoerder:
+    # Define sources to extract data
+    sources:
+      - ['input-data/uitvoerder_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participant/$(uitvoerder_id)
+    # Define subject mapping
+    s: https://data.example.org/participant/$(uitvoerder_id)
+    # Define predicate-object mappings
+    po:
+      - [a, cp:Uitvoerder]
+      - [dcterms:created, $(uitvoerder_creationdate), xsd:dateTime]
+      - [dcterms:modified, $(uitvoerder_modifieddate), xsd:dateTime]
+      - [platform:verwerktOp, $(uitvoerder_processedDate), xsd:dateTime] 
+      - [cp:Realisator.thema, $(thema)]
+      - [cp:Realisator.naam, $(realisatornaam)]
+      - [adms:identifier, https://data.example.org/participant/$(uitvoerder_id)#identifier~iri]
+      - [schema:contactPoint, https://data.example.org/participant/$(uitvoerder_id)#contactPoint~iri]
+
+
+  # Mapping for 'identificator' data
+  identificator:
+    sources:
+      - ['input-data/uitvoerder_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participant/$(uitvoerder_id)
+    # Define subject URI
+    s: https://data.example.org/participant/$(uitvoerder_id)#identifier
+    # Define predicate-object mappings
+    po:
+      - [a, adms:Identifier] 
+      - [skos:notation, https://data.example.org/participant/$(uitvoerder_id), xsd:anyURI]
+      - [dcterms:creator, wegwijs:OVO003887~iri]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/participant/$(uitvoerder_id)#gestructureerdeIdentificator]
+
+  # Mapping for 'gestructureerdeIdentificator' data
+  gestructureerdeIdentificator:
+    sources:
+      - ['input-data/uitvoerder_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participant/$(uitvoerder_id)
+    # Define subject URI
+    s: https://data.example.org/participant/$(uitvoerder_id)#gestructureerdeIdentificator
+    # Define predicate-object mappings
+    po:
+      - [a, generiek:GestructureerdeIdentificator] 
+      - [generiek:naamruimte, https://data.example.org/participant/]
+      - [generiek:lokaleIdentificator, $(uitvoerder_id)]
+
+  # Mapping for 'contactPoint' data
+  contactPoint:
+    sources:
+      - ['input-data/uitvoerder_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/participant/$(uitvoerder_id)
+    # Define subject URI
+    s: https://data.example.org/participant/$(uitvoerder_id)#contactPoint
+    # Define predicate-object mappings
+    po:
+      - [a, schema:ContactPoint] 
+      - [schema:url, $(officialwebsite), xsd:anyURI]
+  
