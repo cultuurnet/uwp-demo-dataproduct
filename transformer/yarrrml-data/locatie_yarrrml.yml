@@ -58,7 +58,7 @@ mappings:
     po:
       - [a, adms:Identifier] 
       - [skos:notation, https://data.example.org/venue/$(location_id), xsd:anyURI]
-      - [dcterms:creator, https://data.vlaanderen.be/id/organisatie/OVO003887~iri]
+      - [dcterms:creator, wegwijs:OVO003887~iri]
       - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
       - [generiek:gestructureerdeIdentificator, https://data.example.org/venue/$(location_id)#gestructureerdeIdentificator~iri]
 

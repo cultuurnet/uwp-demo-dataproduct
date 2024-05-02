@@ -35,7 +35,7 @@ mappings:
       - [a, cidoc:E7_Activity]
       - [dcterms:created, $(activiteit_creationdate), xsd:dateTime]
       - [dcterms:modified, $(activiteit_modifieddate), xsd:dateTime]
-      - [platform:verwerktOp, $(activiteit_processedDate), xsd:dateTime]
+      - [platform:verwerktOp, $(activiteit_processeddate), xsd:dateTime]
       - [dcterms:title, $(activiteit_name_nl), nl~lang]
       - [dcterms:description, $(activiteit_description_nl), nl~lang]
       - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/ActiviteitType/$(activiteit_type)~iri]
@@ -43,8 +43,8 @@ mappings:
       - [adms:identifier, https://data.example.org/event/$(activiteit_id)#identifier~iri]
       - [cidoc:P4_has_time-span, https://data.example.org/event/$(activiteit_id)#period~iri]
       - [prov:atLocation, https://data.example.org/venue/$(activiteit_location_id)~iri]
+      - [cidoc:P14_carried_out_by, https://data.example.org/organizer/$(activiteit_organizer_id)~iri]
 
-    
 
   # Mapping for 'period' data
   period:
@@ -72,7 +72,7 @@ mappings:
     po:
       - [a, adms:Identifier] 
       - [skos:notation, https://data.example.org/event/$(activiteit_id), xsd:anyURI]
-      - [dcterms:creator, https://data.vlaanderen.be/id/organisatie/OVO003887~iri]
+      - [dcterms:creator, wegwijs:OVO003887~iri]
       - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
       - [generiek:gestructureerdeIdentificator, https://data.example.org/event/$(activiteit_id)#gestructureerdeIdentificator~iri]
 

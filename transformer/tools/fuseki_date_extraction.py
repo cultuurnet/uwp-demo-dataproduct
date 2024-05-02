@@ -54,6 +54,20 @@ QUERY_LATEST_DEELNAME_DATE = """
     }
 """
 
+QUERY_LATEST_ORGANISATOR_DATE = """
+    PREFIX dcterms: <http://purl.org/dc/terms/>
+    PREFIX cidoc: <http://www.cidoc-crm.org/cidoc-crm/>
+    PREFIX cp: <https://data.vlaanderen.be/ns/cultuurparticipatie#>
+    PREFIX m8g: <http://data.europa.eu/m8g/>
+
+    SELECT (MAX(?modified) AS ?mostRecentModifiedDate) WHERE {
+        GRAPH ?g {
+        ?s a cp:Organisator ;
+           dcterms:modified ?modified .
+        }
+    }
+"""
+
 @handle_errors
 @printer
 def get_latest_fuseki_update(FusekiClient, query: str, data_type) -> str:
