@@ -27,9 +27,9 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/event/$(activiteit_id)
+    graph: https://data.example.org/id/event/exref/$(activiteit_id)
     # Define subject mapping
-    s: https://data.example.org/event/$(activiteit_id)
+    s: https://data.example.org/id/event/exref/$(activiteit_id)
     # Define predicate-object mappings
     po:
       - [a, cidoc:E7_Activity]
@@ -40,11 +40,11 @@ mappings:
       - [dcterms:description, $(activiteit_description_nl), nl~lang]
       - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/ActiviteitType/$(activiteit_type)~iri]
       - [cp:thema, https://data.cultuurparticipatie.be/id/concept/ThemaType/$(activiteit_thema)~iri]
-      - [adms:identifier, https://data.example.org/event/$(activiteit_id)#identifier~iri]
-      - [cidoc:P4_has_time-span, https://data.example.org/event/$(activiteit_id)#period~iri]
-      - [prov:atLocation, https://data.example.org/venue/$(activiteit_location_id)~iri]
-      - [cidoc:P14_carried_out_by, https://data.example.org/organizer/$(activiteit_organizer_id)~iri]
-      - [cidoc:P14_carried_out_by, https://data.example.org/performer/$(activiteit_performer_id)~iri]
+      - [adms:identifier, https://data.example.org/id/event/exref/$(activiteit_id)#identifier~iri]
+      - [cidoc:P4_has_time-span, https://data.example.org/id/event/exref/$(activiteit_id)#period~iri]
+      - [prov:atLocation, https://data.example.org/id/venue/exref/$(activiteit_location_id)~iri]
+      - [cidoc:P14_carried_out_by, https://data.example.org/id/organizer/exref/$(activiteit_organizer_id)~iri]
+      - [cidoc:P14_carried_out_by, https://data.example.org/id/performer/exref/$(activiteit_performer_id)~iri]
 
 
 
@@ -53,9 +53,9 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/event/$(activiteit_id)
+    graph: https://data.example.org/id/event/exref/$(activiteit_id)
     # Define subject mapping
-    s: https://data.example.org/event/$(activiteit_id)#period
+    s: https://data.example.org/id/event/exref/$(activiteit_id)#period
     # Define predicate-object mappings
     po:
       - [a, m8g:PeriodOfTime] 
@@ -67,27 +67,27 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/event/$(activiteit_id)
+    graph: https://data.example.org/id/event/exref/$(activiteit_id)
     # Define subject URI
-    s: https://data.example.org/event/$(activiteit_id)#identifier
+    s: https://data.example.org/id/event/exref/$(activiteit_id)#identifier
     # Define predicate-object mappings
     po:
       - [a, adms:Identifier] 
-      - [skos:notation, https://data.example.org/event/$(activiteit_id), xsd:anyURI]
+      - [skos:notation, https://data.example.org/id/event/exref/$(activiteit_id), xsd:anyURI]
       - [dcterms:creator, wegwijs:OVO003887~iri]
       - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
-      - [generiek:gestructureerdeIdentificator, https://data.example.org/event/$(activiteit_id)#gestructureerdeIdentificator~iri]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/id/event/exref/$(activiteit_id)#gestructureerdeIdentificator~iri]
 
   # Mapping for event 'gestructureerdeIdentificator' data
   gestructureerdeIdentificator:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/event/$(activiteit_id)
+    graph: https://data.example.org/id/event/exref/$(activiteit_id)
     # Define subject URI
-    s: https://data.example.org/event/$(activiteit_id)#gestructureerdeIdentificator
+    s: https://data.example.org/id/event/exref/$(activiteit_id)#gestructureerdeIdentificator
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
-      - [generiek:naamruimte, https://data.example.org/event/]
+      - [generiek:naamruimte, https://data.example.org/id/event/exref/]
       - [generiek:lokaleIdentificator, $(activiteit_id)]

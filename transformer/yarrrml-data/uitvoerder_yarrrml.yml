@@ -24,9 +24,9 @@ mappings:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/performer/$(uitvoerder_id)
+    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
     # Define subject mapping
-    s: https://data.example.org/performer/$(uitvoerder_id)
+    s: https://data.example.org/id/performer/exref/$(uitvoerder_id)
     # Define predicate-object mappings
     po:
       - [a, cp:Uitvoerder]
@@ -35,8 +35,8 @@ mappings:
       - [platform:verwerktOp, $(uitvoerder_processedDate), xsd:dateTime] 
       - [cp:Realisator.thema, https://data.cultuurparticipatie.be/id/concept/ThemaType/$(uitvoerder_thema)~iri]
       - [cp:Realisator.naam, $(uitvoerder_name_nl), nl~lang]
-      - [adms:identifier, https://data.example.org/performer/$(uitvoerder_id)#identifier~iri]
-      - [schema:contactPoint, https://data.example.org/performer/$(uitvoerder_id)#contactPoint~iri]
+      - [adms:identifier, https://data.example.org/id/performer/exref/$(uitvoerder_id)#identifier~iri]
+      - [schema:contactPoint, https://data.example.org/id/performer/exref/$(uitvoerder_id)#contactPoint~iri]
 
 
   # Mapping for 'identificator' data
@@ -44,28 +44,28 @@ mappings:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/performer/$(uitvoerder_id)
+    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
     # Define subject URI
-    s: https://data.example.org/performer/$(uitvoerder_id)#identifier
+    s: https://data.example.org/id/performer/exref/$(uitvoerder_id)#identifier
     # Define predicate-object mappings
     po:
       - [a, adms:Identifier] 
-      - [skos:notation, https://data.example.org/performer/$(uitvoerder_id), xsd:anyURI]
+      - [skos:notation, https://data.example.org/id/performer/exref/$(uitvoerder_id), xsd:anyURI]
       - [dcterms:creator, wegwijs:OVO003887~iri]
-      - [generiek:gestructureerdeIdentificator, https://data.example.org/performer/$(uitvoerder_id)#gestructureerdeIdentificator]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/id/performer/exref/$(uitvoerder_id)#gestructureerdeIdentificator]
 
   # Mapping for 'gestructureerdeIdentificator' data
   gestructureerdeIdentificator:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/performer/$(uitvoerder_id)
+    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
     # Define subject URI
-    s: https://data.example.org/performer/$(uitvoerder_id)#gestructureerdeIdentificator
+    s: https://data.example.org/id/performer/exref/$(uitvoerder_id)#gestructureerdeIdentificator
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
-      - [generiek:naamruimte, https://data.example.org/performer/]
+      - [generiek:naamruimte, https://data.example.org/id/performer/exref/]
       - [generiek:lokaleIdentificator, $(uitvoerder_id)]
 
   # Mapping for 'contactPoint' data
@@ -73,9 +73,9 @@ mappings:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/performer/$(uitvoerder_id)
+    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
     # Define subject URI
-    s: https://data.example.org/performer/$(uitvoerder_id)#contactPoint
+    s: https://data.example.org/id/performer/exref/$(uitvoerder_id)#contactPoint
     # Define predicate-object mappings
     po:
       - [a, schema:ContactPoint] 
