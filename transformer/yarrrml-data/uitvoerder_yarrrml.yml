@@ -65,8 +65,8 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
-      - [generiek:naamruimte, https://data.example.org/id/performer/exref/]
-      - [generiek:lokaleIdentificator, $(uitvoerder_id)]
+      - [generiek:naamruimte, https://data.example.org/id/performer/]
+      - [generiek:lokaleIdentificator, exref/$(uitvoerder_id)]
 
   # Mapping for 'contactPoint' data
   contactPoint:
