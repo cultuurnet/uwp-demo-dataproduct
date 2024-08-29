@@ -61,4 +61,4 @@ mappings:
     po:
       - [a, generiek:GestructureerdeIdentificator] 
       - [generiek:naamruimte, https://data.example.org/id/participant/]
-      - [generiek:lokaleIdentificator, exref/$(participant_id)]
+      - [generiek:lokaleIdentificator, exref/$(participant_id), xsd:string]

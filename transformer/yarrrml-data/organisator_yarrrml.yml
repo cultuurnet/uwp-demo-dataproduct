@@ -67,7 +67,7 @@ mappings:
     po:
       - [a, generiek:GestructureerdeIdentificator] 
       - [generiek:naamruimte, https://data.example.org/id/organizer/]
-      - [generiek:lokaleIdentificator, exref/$(organisator_id)]
+      - [generiek:lokaleIdentificator, exref/$(organisator_id), xsd:string]
 
   # Mapping for 'address' data
   address:
