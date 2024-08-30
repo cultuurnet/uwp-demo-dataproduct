@@ -20,14 +20,15 @@ def exception_handler(func):
             raise e
     return wrapper
 
-def get_oauth_client(client_id: str, client_secret: str) -> OAuth2Client:
+def get_oauth_client(client_id: str, client_secret: str, token_url: str) -> OAuth2Client:
     """
     Return configured OAuth2Client.
     """
     client = OAuth2Client(
         client_id=client_id,
         client_secret=client_secret,
-        scope= SCOPE,
+        scope=SCOPE,
+        token_url=token_url
     )
     # Using httpx.AsyncClient() as the session manager
     client.session = httpx.Client()
@@ -47,7 +48,7 @@ def get_httpx_client(fuseki_output_port_name: str) -> OAuth2Client:
     token_url = get_environment_variable(f'OUTPUT_{fuseki_output_port_name}_AUTH_TOKEN_URL')
     client_id = get_environment_variable(f'OUTPUT_{fuseki_output_port_name}_AUTH_CLIENT_ID')
     client_secret = get_environment_variable(f'OUTPUT_{fuseki_output_port_name}_AUTH_CLIENT_SECRET')
-    client = get_oauth_client(client_id, client_secret)
+    client = get_oauth_client(client_id, client_secret, token_url)
     configure_oauth_security(token_url)
     client.fetch_token(token_url)
     return client
