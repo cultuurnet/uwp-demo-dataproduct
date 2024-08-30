@@ -80,5 +80,5 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, schema:ContactPoint] 
-      - [schema:url, $(uitvoerder_homepage), xsd:anyURI]
+      - [schema:url, $(uitvoerder_homepage), xsd:string]
   
