@@ -568,12 +568,12 @@ uwps:SociodemografischKenmerkShape
   a sh:NodeShape ;
   sh:targetClass cp:SociodemografischKenmerk ;
   sh:property [
-    sh:path <https://data.uitwisselingsplatform.be/ns/platform#geboortejaar> ;
+    sh:path <https://data.uitwisselingsplatform.be/platform#geboortejaar> ;
     sh:datatype xsd:gYear ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
 ], [
-    sh:path <https://data.uitwisselingsplatform.be/ns/platform#statistischeSector> ;
+    sh:path <https://data.uitwisselingsplatform.be/platform#statistischeSector> ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
@@ -626,5 +626,17 @@ uwps:GeometryShape
   sh:property [
     sh:path <http://www.opengis.net/ont/geosparql#asGML> ;
     sh:datatype <http://www.opengis.net/ont/geosparql#gmlLiteral> ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.opengis.net/ont/geosparql#asWKT> ;
+    sh:datatype <http://www.opengis.net/ont/geosparql#wktLiteral> ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.w3.org/2003/01/geo/wgs84_pos#lat> ;
+    sh:datatype xsd:decimal ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.w3.org/2003/01/geo/wgs84_pos#lon> ;
+    sh:datatype xsd:decimal ;
     sh:maxCount 1
   ] .

@@ -13,7 +13,8 @@ prefixes:
   platform: "https://data.uitwisselingsplatform.be/ns/platform#"
   foaf: "http://xmlns.com/foaf/0.1/"
   m8g: "http://data.europa.eu/m8g/"
-
+  geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
+  
 # Define the mapping rules
 mappings:
 
@@ -99,5 +100,5 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, locn:Geometry] 
-      - [m8g:latitude, $(organisator_geo_latitude)] 
-      - [m8g:longitude, $(organisator_geo_longitude)]
+      - [geo:lat, $(organisator_geo_latitude), xsd:decimal] 
+      - [geo:lon, $(organisator_geo_longitude), xsd:decimal]

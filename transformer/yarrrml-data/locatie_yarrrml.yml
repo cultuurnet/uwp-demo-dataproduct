@@ -20,7 +20,7 @@ prefixes:
   skos: "http://www.w3.org/2004/02/skos/core#"
   generiek: "https://data.vlaanderen.be/ns/generiek#"
   platform: "https://data.uitwisselingsplatform.be/ns/platform#"
-
+  geo: "http://www.w3.org/2003/01/geo/wgs84_pos#"
 # Define the mapping rules
 mappings:
 
@@ -106,5 +106,5 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, locn:Geometry] 
-      - [m8g:latitude, $(location_geo_latitude)] 
-      - [m8g:longitude, $(location_geo_longitude)]
+      - [geo:lat, $(location_geo_latitude), xsd:decimal] 
+      - [geo:lon, $(location_geo_longitude), xsd:decimal]
