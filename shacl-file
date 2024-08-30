@@ -1,0 +1,630 @@
+@prefix uwps: <https://data.uitwisselingsplatform.be/doc/shacl/2023-09-01#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dc: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix adms: <http://www.w3.org/ns/adms#> .
+@prefix schema: <https://schema.org/> .
+@prefix platform: <https://data.uitwisselingsplatform.be/ns/platform#> .
+@prefix generiek: <https://data.vlaanderen.be/ns/generiek#> .
+@prefix m8g: <http://data.europa.eu/m8g/> .
+@prefix cp: <https://data.vlaanderen.be/ns/cultuurparticipatie#> .
+ 
+<https://data.uitwisselingsplatform.be/doc/shacl/2023-09-01#> uwps:shapes
+        #Main Entity Shapes
+        uwps:ActiviteitShape,
+        uwps:DeelnameShape,
+        uwps:LocatieShape,
+        uwps:ParticipantShape,
+        uwps:OrganisatorShape,
+        uwps:UitvoerderShape,
+            #Secondary Shapes
+            #Identifier Shapes (used in ActiviteitShape, LocatieShape, ParticipantShape, OrganisatorShape)
+            uwps:IdentifierShape,
+            uwps:GestructureerdeIdentificatorShape,
+            #Shapes used in ActiviteitShape:
+            uwps:RuimtetijdShape,
+            uwps:PeriodOfTimeShape,
+            uwps:BeschikbaarheidShape,
+            uwps:OpeningHoursSpecificationShape,
+            uwps:VirtualLocationShape,
+            uwps:BoekingsinfoShape,
+            uwps:PriceSpecificationShape,
+            uwps:ContactPointShape, #Also used in OrganisatorShape and UitvoerderShape
+            uwps:GeldbedragShape,
+            #Shapes used in DeelnameShape:
+            uwps:ParticipantProfielShape,
+            uwps:AlgemeenParticipantKenmerkShape,
+            uwps:SociodemografischKenmerkShape,
+            uwps:CultuurdeelnameShape,
+            #Shapes used in LocatieShape and OrganisatorShape:
+            uwps:AddressShape,
+            uwps:GeometryShape .
+ 
+#MAIN ENTITY SHAPES
+ 
+#Activiteit shape
+uwps:ActiviteitShape
+  a <http://www.w3.org/ns/shacl#NodeShape> ;
+  sh:targetClass <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
+  sh:property [
+    sh:path dc:created ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:modified ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#verwerktOp> ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:type ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#thema> ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1
+  ], [
+    sh:path adms:identifier ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:description ;
+    sh:datatype rdf:langString
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#ruimtetijd> ;
+    sh:class <http://www.cidoc-crm.org/cidoc-crm/E92_Spacetime_Volume> ;
+    sh:nodeKind sh:BlankNodeOrIRI
+  ], [
+    sh:path dc:title ;
+    sh:datatype rdf:langString ;
+    sh:minCount 1
+  ], [
+    sh:path schema:location ;
+    sh:class schema:VirtualLocation ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://www.w3.org/ns/prov#atLocation> ;
+    sh:class dc:Location ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span> ;
+    sh:class <http://data.europa.eu/m8g/PeriodOfTime> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Activiteit.locatieType> ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Activiteit.beschikbaarheid> ;
+    sh:class <https://data.vlaanderen.be/ns/cultuurparticipatie#Beschikbaarheid> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Activiteit.boeking> ;
+    sh:class <https://data.vlaanderen.be/ns/cultuurparticipatie#Boekingsinfo> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+  ], [
+    sh:path schema:contactPoint ;
+    sh:class schema:ContactPoint ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+  ], [
+    sh:path <http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+  ], [
+    sh:path <https://www.w3.org/2000/01/rdf-schema#label> ;
+    sh:nodeKind sh:Literal
+  ] .
+ 
+#Deelname Shape
+uwps:DeelnameShape
+  a sh:NodeShape ;
+  sh:targetClass cp:Deelname ;
+  sh:property [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.tijdstip> ;
+    sh:class m8g:PeriodOfTime ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:description "De periode van de deelname afgebakend in tijd." ;
+    sh:minCount 0 ;
+  ], [
+    sh:path dc:type ;
+    sh:nodeKind sh:IRI ;
+    sh:description "Beschrijft het type van deelname." ;
+    sh:minCount 0 ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.participant> ;
+    sh:class cp:Participant ;
+    sh:nodeKind sh:IRI ;
+    sh:description "Referentie naar verbonden participant." ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.inputVoor> ;
+    sh:class cp:ParticipantProfiel ;
+    sh:nodeKind sh:IRI ;
+    sh:description "Referentie naar verbonden klasse." ;
+    sh:minCount 0 ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.activiteit> ;
+    sh:class <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
+    sh:nodeKind sh:IRI ;
+    sh:description "Referentie naar verbonden klasse." ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ].
+ 
+#Locatie Shape
+uwps:LocatieShape
+  a sh:NodeShape ;
+  sh:targetClass dc:Location ;
+  sh:property [
+    sh:path dc:created ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:modified ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#verwerktOp> ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ],[
+    sh:path <http://www.w3.org/ns/prov#invalidatedAtTime> ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path adms:identifier ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#bronIdentificator> ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI
+  ], [
+    sh:path dc:type ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.w3.org/ns/locn#address> ;
+    sh:class <http://www.w3.org/ns/locn#Address> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.w3.org/ns/locn#geometry> ;
+    sh:class <http://www.w3.org/ns/locn#Geometry> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.w3.org/ns/locn#locatorName> ;
+    sh:datatype rdf:langString ;
+    sh:minCount 1
+  ] .
+ 
+#Participant Shape
+uwps:ParticipantShape
+  a sh:NodeShape ;
+  sh:targetClass cp:Participant ;
+  sh:property [
+    sh:path dc:created ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:modified ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#verwerktOp> ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://www.w3.org/ns/prov#invalidatedAtTime> ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path adms:identifier ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path platform:geboortejaar ;
+    sh:datatype xsd:gYear ;
+    sh:maxCount 1
+  ], [
+    sh:path platform:statistischeSector ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ] .
+ 
+#Organisator Shape
+uwps:OrganisatorShape
+  a sh:NodeShape ;
+  sh:targetClass <https://data.vlaanderen.be/ns/cultuurparticipatie#Organisator> ;
+  sh:property [
+    sh:path dc:created ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:modified ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#verwerktOp> ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ],[
+    sh:path <https://www.w3.org/ns/prov#invalidatedAtTime> ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path adms:identifier ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#bronIdentificator> ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI
+  ], [
+    sh:path dc:type ;
+    sh:nodeKind sh:IRI ;
+  ], [
+    sh:path <http://www.w3.org/ns/locn#address> ;
+    sh:class <http://www.w3.org/ns/locn#Address> ;
+    sh:nodeKind sh:BlankNodeOrIRI
+  ], [
+    sh:path <http://www.w3.org/ns/locn#geometry> ;
+    sh:class <http://www.w3.org/ns/locn#Geometry> ;
+    sh:nodeKind sh:BlankNodeOrIRI
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Realisatornaam> ;
+    sh:datatype rdf:langString ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#thema> ;
+    sh:class  <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
+    sh:nodekind sh:IRI
+  ], [
+    sh:path <http://xmlns.com/foaf/0.1/homepage> ;
+    sh:datatype xsd:string;
+    sh:maxCount 1
+  ], [
+    sh:path schema:ContactPoint ;
+    sh:class schema:ContactPoint ;
+    sh:nodekind sh:BlankNodeorLiteral;
+  ]  .
+ 
+#Uitvoerder Shape
+uwps:UitvoerderShape
+  a sh:NodeShape ;
+  sh:targetClass <https://data.vlaanderen.be/ns/cultuurparticipatie#Uitvoerder> ;
+  sh:property [
+    sh:path dc:created ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:modified ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#verwerktOp> ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ],[
+    sh:path <https://www.w3.org/ns/prov#invalidatedAtTime> ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ], [
+    sh:path adms:identifier ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#bronIdentificator> ;
+    sh:class adms:Identifier ;
+    sh:nodeKind sh:BlankNodeOrIRI
+  ], [
+    sh:path dc:type ;
+    sh:nodeKind sh:IRI ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Realisatornaam> ;
+    sh:datatype rdf:langString ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#thema> ;
+    sh:class  <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
+    sh:nodekind sh:IRI
+  ], [
+    sh:path schema:ContactPoint ;
+    sh:class schema:ContactPoint ;
+    sh:nodekind sh:BlankNodeorLiteral;
+  ]  .
+ 
+ 
+ 
+ 
+#SECONDARY SHAPES
+ 
+#Identifier Shapes (used in ActiviteitShape, LocatieShape, ParticipantShape, OrganisatorShape)
+uwps:IdentifierShape
+  a sh:NodeShape ;
+  sh:targetClass adms:Identifier ;
+  sh:property [
+    sh:path dc:creator ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#bron> ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path skos:notation ;
+    sh:datatype xsd:anyURI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path dc:isVersionOf ;
+    sh:nodeKind sh:IRI ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/generiek#gestructureerdeIdentificator> ;
+    sh:class <https://data.vlaanderen.be/ns/generiek#GestructureerdeIdentificator> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ] .
+ 
+uwps:GestructureerdeIdentificatorShape
+  a sh:NodeShape ;
+  sh:targetClass <https://data.vlaanderen.be/ns/generiek#GestructureerdeIdentificator> ;
+  sh:property [
+    sh:path <https://data.vlaanderen.be/ns/generiek#lokaleIdentificator> ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/generiek#naamruimte> ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/generiek#versieIdentificator> ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ] .
+ 
+ 
+#Shapes used in ActiviteitShape
+uwps:RuimtetijdShape
+  a sh:NodeShape ;
+  sh:targetClass <http://www.cidoc-crm.org/cidoc-crm/E92_Spacetime_Volume> ;
+  sh:targetSubjectsOf <https://data.vlaanderen.be/ns/cultuurparticipatie#ruimtetijd> ;
+  sh:property [
+    sh:path <http://www.cidoc-crm.org/cidoc-crm/P160_has_temporal_projection> ;
+    sh:class <http://data.europa.eu/m8g/PeriodOfTime> ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection> ;
+    sh:class dc:Location ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:maxCount 1
+  ] .
+ 
+uwps:PeriodOfTimeShape
+  a sh:NodeShape ;
+  sh:targetClass <http://data.europa.eu/m8g/PeriodOfTime> ;
+  sh:property [
+    sh:path <http://data.europa.eu/m8g/startTime> ;
+    sh:datatype xsd:dateTime ;
+    sh:minCount 1 ;
+    sh:maxCount 1
+  ], [
+    sh:path <http://data.europa.eu/m8g/endTime> ;
+    sh:datatype xsd:dateTime ;
+    sh:maxCount 1
+  ] .
+ 
+uwps:BeschikbaarheidShape
+  a sh:NodeShape ;
+  sh:targetClass <https://data.vlaanderen.be/ns/cultuurparticipatie#Beschikbaarheid> ;
+  sh:property [
+    sh:path schema:hoursAvailable ;
+    sh:class schema:OpeningHoursSpecification ;
+    sh:nodeKind sh:BlankNodeOrIRI
+  ] .
+ 
+uwps:OpeningHoursSpecificationShape
+  a sh:NodeShape ;
+  sh:targetClass schema:OpeningHoursSpecification ;
+  sh:property [
+    sh:path schema:opens ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ], [
+    sh:path schema:closes ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ], [
+    sh:path schema:dayOfWeek ;
+    sh:nodeKind sh:IRI
+  ] .
+ 
+uwps:VirtualLocationShape
+  a sh:NodeShape ;
+  sh:targetClass schema:VirtualLocation ;
+  sh:property [
+    sh:path schema:url ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ] .
+ 
+uwps:BoekingsinfoShape
+  a sh:NodeShape ;
+  sh:targetClass <https://data.vlaanderen.be/ns/cultuurparticipatie#Boekingsinfo> ;
+  sh:property [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Boekingsinfo.beschikbaar> ;
+    sh:class <http://data.europa.eu/m8g/PeriodOfTime> ;
+    sh:maxCount 1
+  ], [
+    sh:path schema:contactPoint ;
+    sh:class schema:ContactPoint ;
+    sh:maxCount 1
+  ] .
+ 
+#ContactPointShape also used by OrganisatorShape and UitvoerderShape
+uwps:ContactPointShape
+  a sh:NodeShape ;
+  sh:targetClass schema:ContactPoint ;
+  sh:property [
+    sh:path schema:url ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ], [
+    sh:path schema:email ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ], [
+    sh:path schema:telephone ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1
+  ] .
+ 
+uwps:PriceSpecificationShape
+  a sh:NodeShape ;
+  sh:targetClass schema:PriceSpecification ;
+  sh:property [
+    sh:path schema:price ;
+    sh:class schema:MonetaryAmount ;
+    sh:maxCount 1
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Prijsinfo.prijscategorie> ;
+    sh:nodeKind sh:IRI ;
+  ], [
+    sh:path <http://www.w3.org/2004/02/skos/core#prefLabel> ;
+    sh:datatype rdf:langString
+  ] .
+ 
+ 
+ 
+ 
+ 
+#Shapes used in DeelnameShape
+uwps:ParticipantProfielShape
+  a sh:NodeShape ;
+  sh:targetClass cp:ParticipantProfiel ;
+  sh:property [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#ParticipantProfiel.algemeenKenmerk> ;
+    sh:class cp:AlgemeenParticipantKenmerk ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#ParticipantProfiel.sociodemografisch> ;
+    sh:class cp:SociodemografischKenmerk ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#ParticipantProfiel.cultureel> ;
+    sh:class cp:Cultuurdeelname ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+ 
+uwps:AlgemeenParticipantKenmerkShape
+  a sh:NodeShape ;
+  sh:targetClass cp:AlgemeenParticipantKenmerk ;
+  sh:property [
+    sh:path dc:type ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+ 
+uwps:SociodemografischKenmerkShape
+  a sh:NodeShape ;
+  sh:targetClass cp:SociodemografischKenmerk ;
+  sh:property [
+    sh:path <https://data.uitwisselingsplatform.be/platform#geboortejaar> ;
+    sh:datatype xsd:gYear ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+], [
+    sh:path <https://data.uitwisselingsplatform.be/platform#statistischeSector> ;
+    sh:datatype xsd:string ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+ 
+uwps:CultuurdeelnameShape
+  a sh:NodeShape ;
+  sh:targetClass cp:Cultuurdeelname ;
+  sh:property [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Cultuurdeelname.themaActiviteit> ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ], [
+    sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Cultuurdeelname.typeActiviteit> ;
+    sh:nodeKind sh:IRI ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+  ] .
+ 
+ 
+ 
+#Shapes used in LocatieShape and OrganisatorShape
+uwps:AddressShape
+  a sh:NodeShape ;
+  sh:targetClass <http://www.w3.org/ns/locn#Address> ;
+  sh:property [
+    sh:path <http://www.w3.org/ns/locn#adminUnitL1> ;
+    sh:datatype xsd:string ;
+  ], [
+    sh:path <http://www.w3.org/ns/locn#fullAddress> ;
+    sh:datatype rdf:langString ;
+  ], [
+    sh:path <http://www.w3.org/ns/locn#locatorDesignator> ;
+    sh:datatype xsd:string ;
+  ], [
+    sh:path <http://www.w3.org/ns/locn#postName> ;
+    sh:datatype rdf:langString ;
+  ], [
+    sh:path <http://www.w3.org/ns/locn#postcode> ;
+    sh:datatype xsd:string ;
+  ], [
+    sh:path <http://www.w3.org/ns/locn#thoroughfare> ;
+    sh:datatype rdf:langString ;
+  ] .
+ 
+uwps:GeometryShape
+  a sh:NodeShape ;
+  sh:targetClass <http://www.w3.org/ns/locn#Geometry> ;
+  sh:property [
+    sh:path <http://www.opengis.net/ont/geosparql#asGML> ;
+    sh:datatype <http://www.opengis.net/ont/geosparql#gmlLiteral> ;
+    sh:maxCount 1
+  ] .
