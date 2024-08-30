@@ -39,7 +39,7 @@ mappings:
       - [dcterms:created, $(locatie_createddate), xsd:dateTime]
       - [dcterms:modified, $(locatie_modifieddate), xsd:dateTime]
       - [platform:verwerktOp, $(locatie_processeddate), xsd:dateTime]
-      - [dcterms:title, $(location_name_nl), nl~lang]
+#      - [locn:locatorName, $(location_name_nl), nl~lang]
       - [dcterms:type, loctype:$(location_type)~iri]
       - [locn:address, https://data.example.org/id/venue/exref/$(location_id)#address~iri] # Predicate is locn:address
       - [locn:geometry, https://data.example.org/id/venue/exref/$(location_id)#geometry~iri]
@@ -73,7 +73,7 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
-      - [generiek:naamruimte, https://data.example.org/id/venue/]
+      - [generiek:naamruimte, https://data.example.org/id/venue/, xsd:string]
       - [generiek:lokaleIdentificator, exref/$(location_id), xsd:string]
 
   # Mapping for 'address' data

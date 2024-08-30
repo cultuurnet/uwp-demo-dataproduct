@@ -12,7 +12,7 @@ prefixes:
   wegwijs: "https://data.vlaanderen.be/id/organisatie/"
   adms: "http://www.w3.org/ns/adms#"
   generiek: "https://data.vlaanderen.be/ns/generiek#"
-  platform: "https://data.uitwisselingsplatform.be/platform#"
+  platform: "https://data.uitwisselingsplatform.be/ns/platform#"
   schema: "https://schema.org/"
 
 # Define the mapping rules
@@ -52,6 +52,7 @@ mappings:
       - [a, adms:Identifier] 
       - [skos:notation, https://data.example.org/id/performer/exref/$(uitvoerder_id), xsd:anyURI]
       - [dcterms:creator, wegwijs:OVO003887~iri]
+      - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
       - [generiek:gestructureerdeIdentificator, https://data.example.org/id/performer/exref/$(uitvoerder_id)#gestructureerdeIdentificator]
 
   # Mapping for 'gestructureerdeIdentificator' data
@@ -65,7 +66,7 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
-      - [generiek:naamruimte, https://data.example.org/id/performer/]
+      - [generiek:naamruimte, https://data.example.org/id/performer/, xsd:string]
       - [generiek:lokaleIdentificator, exref/$(uitvoerder_id), xsd:string]
 
   # Mapping for 'contactPoint' data

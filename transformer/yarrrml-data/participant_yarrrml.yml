@@ -29,6 +29,7 @@ mappings:
       - [a, cp:Participant]
       - [dcterms:created, $(participant_creationdate), xsd:dateTime]
       - [dcterms:modified, $(participant_modifieddate), xsd:dateTime]
+      - [platform:verwerktOp, $(participant_processeddate), xsd:dateTime]
       - [adms:identifier, https://data.example.org/id/participant/exref/$(participant_id)#identifier]
       - [platform:geboortejaar, $(birthYear), xsd:gYear]
       - [platform:statistischeSector, $(statSectPlaceholder)]
@@ -60,5 +61,5 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
-      - [generiek:naamruimte, https://data.example.org/id/participant/]
+      - [generiek:naamruimte, https://data.example.org/id/participant/, xsd:string]
       - [generiek:lokaleIdentificator, exref/$(participant_id), xsd:string]
