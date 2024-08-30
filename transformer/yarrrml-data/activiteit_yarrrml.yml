@@ -33,6 +33,7 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, cidoc:E7_Activity]
+#      - [a, cp:Deelname] # REMOVE THIS LINE, THIS ONE IS FOR TESTING ONLY.
       - [dcterms:created, $(activiteit_creationdate), xsd:dateTime]
       - [dcterms:modified, $(activiteit_modifieddate), xsd:dateTime]
       - [platform:verwerktOp, $(activiteit_processeddate), xsd:dateTime]

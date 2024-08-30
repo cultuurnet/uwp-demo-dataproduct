@@ -568,12 +568,12 @@ uwps:SociodemografischKenmerkShape
   a sh:NodeShape ;
   sh:targetClass cp:SociodemografischKenmerk ;
   sh:property [
-    sh:path <https://data.uitwisselingsplatform.be/platform#geboortejaar> ;
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#geboortejaar> ;
     sh:datatype xsd:gYear ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
 ], [
-    sh:path <https://data.uitwisselingsplatform.be/platform#statistischeSector> ;
+    sh:path <https://data.uitwisselingsplatform.be/ns/platform#statistischeSector> ;
     sh:datatype xsd:string ;
     sh:minCount 1 ;
     sh:maxCount 1 ;
