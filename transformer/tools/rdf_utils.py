@@ -37,10 +37,8 @@ def materialize_conjunctive_graph(config, python_source=None):
 # validate on a per-graph basis, which can be quicker than validating all graphs together
 def validate_per_graph(graph, shacl_graph):
     for g in graph.contexts():
-        print(f"Validating graph context: {g.serialize(format='turtle')}")
         (is_valid, failure, failure_reason) = validate(g, shacl_graph)
         if not is_valid:
-            print(f"Failure reason: {failure_reason}")
             return (is_valid, failure, failure_reason)
         
     return (is_valid, failure, failure_reason)

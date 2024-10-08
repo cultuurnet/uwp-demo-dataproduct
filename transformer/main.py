@@ -45,7 +45,6 @@ def push_data(data_type, latest_update_fuseki_query):
     
     shacl_graph = Graph()
     shacl_graph.parse("transformer/shacl-file/shacl-file.ttl", format="turtle")
-    print(shacl_graph.serialize(format="turtle"))
 
     while True:
         # Step 1: Find the latest modified date, to only add newly modified/created entities
@@ -62,7 +61,6 @@ def push_data(data_type, latest_update_fuseki_query):
 
         # Step 3: Generate RDF graph (n-quads) from CSV (found in `file_path`) using morph-kgc
         graph_store = generate_conjunctive_graph(config_ini)
-        print(graph_store.serialize(format="nquads"))
 
         (is_valid, _, failure_reason) = validate_per_graph(graph_store, shacl_graph)
         if not is_valid:
