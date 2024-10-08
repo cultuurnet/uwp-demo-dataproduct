@@ -24,7 +24,7 @@ mappings:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
+    graph: https://data.example.org/graph/performer/exref/$(uitvoerder_id)
     # Define subject mapping
     s: https://data.example.org/id/performer/exref/$(uitvoerder_id)
     # Define predicate-object mappings
@@ -44,7 +44,7 @@ mappings:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
+    graph: https://data.example.org/graph/performer/exref/$(uitvoerder_id)
     # Define subject URI
     s: https://data.example.org/id/performer/exref/$(uitvoerder_id)#identifier
     # Define predicate-object mappings
@@ -60,7 +60,7 @@ mappings:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
+    graph: https://data.example.org/graph/performer/exref/$(uitvoerder_id)
     # Define subject URI
     s: https://data.example.org/id/performer/exref/$(uitvoerder_id)#gestructureerdeIdentificator
     # Define predicate-object mappings
@@ -74,7 +74,7 @@ mappings:
     sources:
       - ['input-data/uitvoerder_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/performer/exref/$(uitvoerder_id)
+    graph: https://data.example.org/graph/performer/exref/$(uitvoerder_id)
     # Define subject URI
     s: https://data.example.org/id/performer/exref/$(uitvoerder_id)#contactPoint
     # Define predicate-object mappings

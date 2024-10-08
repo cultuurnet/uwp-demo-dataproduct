@@ -21,7 +21,7 @@ mappings:
     sources:
       - ['input-data/participant_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participant/exref/$(participant_id)
+    graph: https://data.example.org/graph/participant/exref/$(participant_id)
     # Define subject mapping
     s: https://data.example.org/id/participant/exref/$(participant_id)
     # Define predicate-object mappings
@@ -39,7 +39,7 @@ mappings:
     sources:
       - ['input-data/participant_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participant/exref/$(participant_id)
+    graph: https://data.example.org/graph/participant/exref/$(participant_id)
     # Define subject URI
     s: https://data.example.org/id/participant/exref/$(participant_id)#identifier
     # Define predicate-object mappings
@@ -55,7 +55,7 @@ mappings:
     sources:
       - ['input-data/participant_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participant/exref/$(participant_id)
+    graph: https://data.example.org/graph/participant/exref/$(participant_id)
     # Define subject URI
     s: https://data.example.org/id/participant/exref/$(participant_id)#gestructureerdeIdentificator
     # Define predicate-object mappings

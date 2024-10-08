@@ -30,7 +30,7 @@ mappings:
     sources:
       - ['input-data/locatie_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/venue/exref/$(location_id)
+    graph: https://data.example.org/graph/venue/exref/$(location_id)
     # Define subject mapping
     s: https://data.example.org/id/venue/exref/$(location_id)
     # Define predicate-object mappings
@@ -51,7 +51,7 @@ mappings:
     sources:
       - ['input-data/locatie_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/venue/exref/$(location_id)
+    graph: https://data.example.org/graph/venue/exref/$(location_id)
     # Define subject URI
     s: https://data.example.org/id/venue/exref/$(location_id)#identifier
     # Define predicate-object mappings
@@ -67,7 +67,7 @@ mappings:
     sources:
       - ['input-data/locatie_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/venue/exref/$(location_id)
+    graph: https://data.example.org/graph/venue/exref/$(location_id)
     # Define subject URI
     s: https://data.example.org/id/venue/exref/$(location_id)#gestructureerdeIdentificator
     # Define predicate-object mappings
@@ -82,7 +82,7 @@ mappings:
     sources:
       - ['input-data/locatie_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/venue/exref/$(location_id)
+    graph: https://data.example.org/graph/venue/exref/$(location_id)
     # Define subject URI
     s: https://data.example.org/id/venue/exref/$(location_id)#address
     # Define predicate-object mappings
@@ -100,7 +100,7 @@ mappings:
     sources:
       - ['input-data/locatie_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/venue/exref/$(location_id)
+    graph: https://data.example.org/graph/venue/exref/$(location_id)
     # Define subject URI 
     s: https://data.example.org/id/venue/exref/$(location_id)#geometry
     # Define predicate-object mappings

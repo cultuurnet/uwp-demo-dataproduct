@@ -1,8 +1,18 @@
-from os import getenv
+from os import getenv, environ
+from collections import defaultdict
 import logging
 import time
 from functools import wraps
 
+INPUT_PORTS: defaultdict[str, dict[str, str]] = defaultdict(dict)
+OUTPUT_PORTS: defaultdict[str, dict[str, str]] = defaultdict(dict)
+
+for k, v in environ.items():
+    parts = k.split("_", maxsplit=2)
+    if k.startswith("INPUT_"):
+        INPUT_PORTS[parts[1]] |= {parts[2]: v}
+    elif k.startswith("OUTPUT_"):
+        OUTPUT_PORTS[parts[1]] |= {parts[2]: v}
 
 def get_environment_variable(var_name: str) -> str:
     """

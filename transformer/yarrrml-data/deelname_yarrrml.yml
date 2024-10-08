@@ -22,7 +22,7 @@ mappings:
     sources:
       - ['input-data/deelname_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participation/exref/$(deelname_id)
+    graph: https://data.example.org/graph/participation/exref/$(deelname_id)
     # Define subject mapping
     s: https://data.example.org/id/participation/exref/$(deelname_id)
     # Define predicate-object mappings
@@ -39,7 +39,7 @@ mappings:
     sources:
       - ['input-data/deelname_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participation/exref/$(deelname_id)
+    graph: https://data.example.org/graph/participation/exref/$(deelname_id)
     # Define subject mapping
     s: https://data.example.org/id/participation/exref/$(deelname_id)#tijdstip
     # Define predicate-object mappings
@@ -52,7 +52,7 @@ mappings:
     sources:
       - ['input-data/deelname_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participation/exref/$(deelname_id)
+    graph: https://data.example.org/graph/participation/exref/$(deelname_id)
     # Define subject mapping
     s: https://data.example.org/id/participantProfiel/exref/$(deelname_id)
     # Define predicate-object mappings
@@ -67,7 +67,7 @@ mappings:
     sources:
       - ['input-data/deelname_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participation/exref/$(deelname_id)
+    graph: https://data.example.org/graph/participation/exref/$(deelname_id)
     # Define subject mapping
     s: https://data.example.org/id/participantProfiel/exref/$(deelname_id)#algemeenKenmerk
     # Define predicate-object mappings
@@ -80,7 +80,7 @@ mappings:
     sources:
       - ['input-data/deelname_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participation/exref/$(deelname_id)
+    graph: https://data.example.org/graph/participation/exref/$(deelname_id)
     # Define subject mapping
     s: https://data.example.org/id/participantProfiel/exref/$(deelname_id)#sociodemografisch
     # Define predicate-object mappings
@@ -94,7 +94,7 @@ mappings:
     sources:
       - ['input-data/deelname_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/participation/exref/$(deelname_id)
+    graph: https://data.example.org/graph/participation/exref/$(deelname_id)
     # Define subject mapping
     s: https://data.example.org/id/participantProfiel/exref/$(deelname_id)#cultuurdeelname
     # Define predicate-object mappings

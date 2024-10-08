@@ -1,4 +1,7 @@
 import logging
+
+from rdflib import Graph
+
 from tools.fuseki_client import FusekiClient
 from tools.fuseki_date_extraction import (
     get_latest_fuseki_update,
@@ -9,7 +12,8 @@ from tools.fuseki_date_extraction import (
     QUERY_LATEST_ORGANISATOR_DATE,
     QUERY_LATEST_UITVOERDER_DATE,
 )
-from tools.rdf_utils import generate_rdf_graph
+
+from tools.rdf_utils import generate_conjunctive_graph, validate_per_graph
 from tools.csv_utils import compare_input_date_with_latest_date
 from tools.constants import (
     FUSEKI_OUTPUT_PORT_NAME,
@@ -38,6 +42,11 @@ def push_data(data_type, latest_update_fuseki_query):
                 """
 
     previous_latest_date = ""
+    
+    shacl_graph = Graph()
+    shacl_graph.parse("transformer/shacl-file/shacl-file.ttl", format="turtle")
+    print(shacl_graph.serialize(format="turtle"))
+
     while True:
         # Step 1: Find the latest modified date, to only add newly modified/created entities
         latest_date = get_latest_fuseki_update(
@@ -52,13 +61,19 @@ def push_data(data_type, latest_update_fuseki_query):
             previous_latest_date = latest_date
 
         # Step 3: Generate RDF graph (n-quads) from CSV (found in `file_path`) using morph-kgc
-        graph_store = generate_rdf_graph(config_ini)
+        graph_store = generate_conjunctive_graph(config_ini)
+        print(graph_store.serialize(format="nquads"))
+
+        (is_valid, _, failure_reason) = validate_per_graph(graph_store, shacl_graph)
+        if not is_valid:
+            logging.warning(failure_reason)
+            return
 
         # Step 4: Clear existing named entity graphs in Fuseki
         fuseki_client.clear_graphs(graph_store)
 
         # Step 5: Load the RDF graph (n-quads) into Fuseki
-        fuseki_client.load_store(graph_store)
+        fuseki_client.load_conjunctive_graph(graph_store)
 
 
 if __name__ == "__main__":

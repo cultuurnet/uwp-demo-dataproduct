@@ -24,7 +24,7 @@ mappings:
     sources:
       - ['input-data/organisator_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/organizer/exref/$(organisator_id)
+    graph: https://data.example.org/graph/organizer/exref/$(organisator_id)
     # Define subject mapping
     s: https://data.example.org/id/organizer/exref/$(organisator_id)
     # Define predicate-object mappings
@@ -45,7 +45,7 @@ mappings:
     sources:
       - ['input-data/organisator_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/organizer/exref/$(organisator_id)
+    graph: https://data.example.org/graph/organizer/exref/$(organisator_id)
     # Define subject URI
     s: https://data.example.org/id/organizer/exref/$(organisator_id)#identifier
     # Define predicate-object mappings
@@ -61,7 +61,7 @@ mappings:
     sources:
       - ['input-data/organisator_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/organizer/exref/$(organisator_id)
+    graph: https://data.example.org/graph/organizer/exref/$(organisator_id)
     # Define subject URI
     s: https://data.example.org/id/organizer/exref/$(organisator_id)#gestructureerdeIdentificator
     # Define predicate-object mappings
@@ -76,7 +76,7 @@ mappings:
     sources:
       - ['input-data/organisator_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/organizer/exref/$(organisator_id)
+    graph: https://data.example.org/graph/organizer/exref/$(organisator_id)
     # Define subject URI
     s: https://data.example.org/id/organizer/exref/$(organisator_id)#address
     # Define predicate-object mappings
@@ -94,7 +94,7 @@ mappings:
     sources:
       - ['input-data/organisator_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/id/organizer/exref/$(organisator_id)
+    graph: https://data.example.org/graph/organizer/exref/$(organisator_id)
     # Define subject URI 
     s: https://data.example.org/id/organizer/exref/$(organisator_id)#geometry
     # Define predicate-object mappings
