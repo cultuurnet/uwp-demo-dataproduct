@@ -86,8 +86,9 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, cp:SociodemografischKenmerk]
-      - [platform:geboortejaar, $(participant_birthYear), xsd:gYear]
-      - [platform:statistischeSector, $(participant_statSectorId)]
+      - [platform:geboortejaar, $(participant_birthyear), xsd:gYear]
+      - [platform:statistischeSectorId, $(participant_statsector_id), xsd:string]
+      - [platform:statistischeSectorNaam, $(participant_statsector_name), xsd:string]
   
   # Mapping for 'Cultuurdeelname' data
   cultuurdeelname:

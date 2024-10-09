@@ -62,10 +62,12 @@ def push_data(data_type, latest_update_fuseki_query):
         # Step 3: Generate RDF graph (n-quads) from CSV (found in `file_path`) using morph-kgc
         graph_store = generate_conjunctive_graph(config_ini)
 
-        (is_valid, _, failure_reason) = validate_per_graph(graph_store, shacl_graph)
+        is_valid, _, failure_reason = validate_per_graph(graph_store, shacl_graph)
         if not is_valid:
-            logging.warning(failure_reason)
-            return
+            logging.warning(f"SHACL validation failed: {failure_reason}")
+            return  # Exit early if validation fails
+        else:
+            logging.info("SHACL validation successful")
 
         # Step 4: Clear existing named entity graphs in Fuseki
         fuseki_client.clear_graphs(graph_store)

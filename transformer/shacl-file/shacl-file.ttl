@@ -88,12 +88,12 @@ uwps:ActiviteitShape
     sh:minCount 1
   ], [
     sh:path schema:location ;
-    sh:class schema:VirtualLocation ;
+    # sh:class schema:VirtualLocation ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:maxCount 1
   ], [
     sh:path <https://www.w3.org/ns/prov#atLocation> ;
-    sh:class dc:Location ;
+    # sh:class dc:Location ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:maxCount 1
   ], [
@@ -143,7 +143,7 @@ uwps:DeelnameShape
     sh:minCount 0 ;
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.participant> ;
-    sh:class cp:Participant ;
+    # sh:class cp:Participant ;
     sh:nodeKind sh:IRI ;
     sh:description "Referentie naar verbonden participant." ;
     sh:minCount 1 ;
@@ -156,7 +156,7 @@ uwps:DeelnameShape
     sh:minCount 0 ;
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.activiteit> ;
-    sh:class <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
+    # sh:class <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
     sh:nodeKind sh:IRI ;
     sh:description "Referentie naar verbonden klasse." ;
     sh:minCount 1 ;
@@ -299,7 +299,7 @@ uwps:OrganisatorShape
     sh:datatype rdf:langString ;
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#thema> ;
-    sh:class  <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
+    sh:class <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
     sh:nodekind sh:IRI
   ], [
     sh:path <http://xmlns.com/foaf/0.1/homepage> ;
@@ -350,7 +350,7 @@ uwps:UitvoerderShape
     sh:datatype rdf:langString ;
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#thema> ;
-    sh:class  <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
+    sh:class <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
     sh:nodekind sh:IRI
   ], [
     sh:path schema:ContactPoint ;
@@ -427,7 +427,7 @@ uwps:RuimtetijdShape
     sh:maxCount 1
   ], [
     sh:path <http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection> ;
-    sh:class dc:Location ;
+    # sh:class dc:Location ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:maxCount 1
   ] .
@@ -539,19 +539,19 @@ uwps:ParticipantProfielShape
     sh:class cp:AlgemeenParticipantKenmerk ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:maxCount 1 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#ParticipantProfiel.sociodemografisch> ;
     sh:class cp:SociodemografischKenmerk ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:maxCount 1 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#ParticipantProfiel.cultureel> ;
     sh:class cp:Cultuurdeelname ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:maxCount 1 
   ] .
  
 uwps:AlgemeenParticipantKenmerkShape
@@ -561,7 +561,7 @@ uwps:AlgemeenParticipantKenmerkShape
     sh:path dc:type ;
     sh:nodeKind sh:IRI ;
     sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:maxCount 1 
   ] .
  
 uwps:SociodemografischKenmerkShape
@@ -570,13 +570,15 @@ uwps:SociodemografischKenmerkShape
   sh:property [
     sh:path <https://data.uitwisselingsplatform.be/platform#geboortejaar> ;
     sh:datatype xsd:gYear ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
-], [
-    sh:path <https://data.uitwisselingsplatform.be/platform#statistischeSector> ;
+    sh:maxCount 1 
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/platform#statistischeSectorId> ;
     sh:datatype xsd:string ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:maxCount 1 
+  ], [
+    sh:path <https://data.uitwisselingsplatform.be/platform#statistischeSectorNaam> ;
+    sh:datatype xsd:string ;
+    sh:maxCount 1 
   ] .
  
 uwps:CultuurdeelnameShape
@@ -584,14 +586,10 @@ uwps:CultuurdeelnameShape
   sh:targetClass cp:Cultuurdeelname ;
   sh:property [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Cultuurdeelname.themaActiviteit> ;
-    sh:nodeKind sh:IRI ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Cultuurdeelname.typeActiviteit> ;
-    sh:nodeKind sh:IRI ;
-    sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:nodeKind sh:IRI 
   ] .
  
  

@@ -31,8 +31,9 @@ mappings:
       - [dcterms:modified, $(participant_modifieddate), xsd:dateTime]
       - [platform:verwerktOp, $(participant_processeddate), xsd:dateTime]
       - [adms:identifier, https://data.example.org/id/participant/exref/$(participant_id)#identifier]
-      - [platform:geboortejaar, $(birthYear), xsd:gYear]
-      - [platform:statistischeSector, $(statSectPlaceholder)]
+      - [platform:geboortejaar, $(participant_birthyear), xsd:gYear]
+      - [platform:statistischeSectorId, $(participant_statsector_id), xsd:string]
+      - [platform:statistischeSectorNaam, $(participant_statsector_name), xsd:string]
   
   # Mapping for 'identificator' data
   identificator:
