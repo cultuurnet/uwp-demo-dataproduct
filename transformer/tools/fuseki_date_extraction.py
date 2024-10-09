@@ -109,21 +109,23 @@ def extract_most_recent_date(FusekiClient, query: str) -> str:
         return "1990-01-01T00:00:00.000+00:00"
 
 
-def transform_datetime(fuseki_datetime: str) -> str:
+def transform_datetime(fuseki_datetime: str) -> datetime:
     """
-    Remove the timezone information from the Fuseki datetime string and add one second.
-    Example input: "2018-09-25T11:56:56+0000"
-    Example output: "2018-09-25 11:56:57"
+    Ensure the Fuseki datetime string is converted to a timezone-aware datetime object.
+    Example input: "2018-09-25T11:56:56+00:00"
     """
-    # If the timezone is 'Z' (UTC), replace it with '+0000'
+    # If the timezone is 'Z' (UTC), replace it with '+00:00'
     if fuseki_datetime.endswith('Z'):
-        fuseki_datetime = fuseki_datetime[:-1] + '+0000'
-    # Convert string to datetime object
-    date = datetime.strptime(fuseki_datetime, "%Y-%m-%dT%H:%M:%S%z")
+        fuseki_datetime = fuseki_datetime[:-1] + '+00:00'
+    
+    # Convert string to timezone-aware datetime object
+    date = datetime.fromisoformat(fuseki_datetime)
+    
+    # Add one second to account for the adjustment
     date = date + timedelta(seconds=1)
-    # Convert back to string in the format "YYYY-MM-DD HH:MI:%S"
-    date_sql_format = date.strftime("%Y-%m-%d %H:%M:%S")
-    return date_sql_format
+    
+    # Return the datetime object (with timezone)
+    return date
 
 
 def extract_datetime(result_set: dict) -> str:
