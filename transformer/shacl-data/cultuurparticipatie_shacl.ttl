@@ -135,32 +135,32 @@ uwps:DeelnameShape
     sh:class m8g:PeriodOfTime ;
     sh:nodeKind sh:BlankNodeOrIRI ;
     sh:description "De periode van de deelname afgebakend in tijd." ;
-    sh:minCount 0 ;
+    sh:minCount 0 
   ], [
     sh:path dc:type ;
     sh:nodeKind sh:IRI ;
     sh:description "Beschrijft het type van deelname." ;
-    sh:minCount 0 ;
+    sh:minCount 0 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.participant> ;
     # sh:class cp:Participant ;
     sh:nodeKind sh:IRI ;
     sh:description "Referentie naar verbonden participant." ;
     sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:maxCount 1 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.inputVoor> ;
     sh:class cp:ParticipantProfiel ;
     sh:nodeKind sh:IRI ;
     sh:description "Referentie naar verbonden klasse." ;
-    sh:minCount 0 ;
+    sh:minCount 0 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Deelname.activiteit> ;
     # sh:class <http://www.cidoc-crm.org/cidoc-crm/E7_Activity> ;
     sh:nodeKind sh:IRI ;
     sh:description "Referentie naar verbonden klasse." ;
     sh:minCount 1 ;
-    sh:maxCount 1 ;
+    sh:maxCount 1 
   ].
  
 #Locatie Shape
@@ -285,7 +285,7 @@ uwps:OrganisatorShape
     sh:nodeKind sh:BlankNodeOrIRI
   ], [
     sh:path dc:type ;
-    sh:nodeKind sh:IRI ;
+    sh:nodeKind sh:IRI 
   ], [
     sh:path <http://www.w3.org/ns/locn#address> ;
     sh:class <http://www.w3.org/ns/locn#Address> ;
@@ -296,7 +296,7 @@ uwps:OrganisatorShape
     sh:nodeKind sh:BlankNodeOrIRI
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Realisatornaam> ;
-    sh:datatype rdf:langString ;
+    sh:datatype rdf:langString 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#thema> ;
     sh:class <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
@@ -308,7 +308,7 @@ uwps:OrganisatorShape
   ], [
     sh:path schema:ContactPoint ;
     sh:class schema:ContactPoint ;
-    sh:nodekind sh:BlankNodeorLiteral;
+    sh:nodekind sh:BlankNodeorLiteral
   ]  .
  
 #Uitvoerder Shape
@@ -344,10 +344,10 @@ uwps:UitvoerderShape
     sh:nodeKind sh:BlankNodeOrIRI
   ], [
     sh:path dc:type ;
-    sh:nodeKind sh:IRI ;
+    sh:nodeKind sh:IRI 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Realisatornaam> ;
-    sh:datatype rdf:langString ;
+    sh:datatype rdf:langString 
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#thema> ;
     sh:class <https://data.cultuurparticipatie.be/id/conceptscheme/ThemaType/>;
@@ -355,7 +355,7 @@ uwps:UitvoerderShape
   ], [
     sh:path schema:ContactPoint ;
     sh:class schema:ContactPoint ;
-    sh:nodekind sh:BlankNodeorLiteral;
+    sh:nodekind sh:BlankNodeorLiteral
   ]  .
  
  
@@ -520,7 +520,7 @@ uwps:PriceSpecificationShape
     sh:maxCount 1
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Prijsinfo.prijscategorie> ;
-    sh:nodeKind sh:IRI ;
+    sh:nodeKind sh:IRI 
   ], [
     sh:path <http://www.w3.org/2004/02/skos/core#prefLabel> ;
     sh:datatype rdf:langString
@@ -600,22 +600,22 @@ uwps:AddressShape
   sh:targetClass <http://www.w3.org/ns/locn#Address> ;
   sh:property [
     sh:path <http://www.w3.org/ns/locn#adminUnitL1> ;
-    sh:datatype xsd:string ;
+    sh:datatype xsd:string 
   ], [
     sh:path <http://www.w3.org/ns/locn#fullAddress> ;
-    sh:datatype rdf:langString ;
+    sh:datatype rdf:langString 
   ], [
     sh:path <http://www.w3.org/ns/locn#locatorDesignator> ;
-    sh:datatype xsd:string ;
+    sh:datatype xsd:string 
   ], [
     sh:path <http://www.w3.org/ns/locn#postName> ;
-    sh:datatype rdf:langString ;
+    sh:datatype rdf:langString 
   ], [
     sh:path <http://www.w3.org/ns/locn#postcode> ;
-    sh:datatype xsd:string ;
+    sh:datatype xsd:string 
   ], [
     sh:path <http://www.w3.org/ns/locn#thoroughfare> ;
-    sh:datatype rdf:langString ;
+    sh:datatype rdf:langString 
   ] .
  
 uwps:GeometryShape
