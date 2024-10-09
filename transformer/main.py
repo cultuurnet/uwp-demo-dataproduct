@@ -44,7 +44,7 @@ def push_data(data_type, latest_update_fuseki_query):
     previous_latest_date = ""
     
     shacl_graph = Graph()
-    shacl_graph.parse("transformer/shacl-file/shacl-file.ttl", format="turtle")
+    shacl_graph.parse("transformer/shacl-data/cultuurparticipatie_shacl.ttl", format="turtle")
 
     while True:
         # Step 1: Find the latest modified date, to only add newly modified/created entities
