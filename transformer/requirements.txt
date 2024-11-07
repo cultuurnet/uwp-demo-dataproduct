@@ -1,7 +1,9 @@
-rdflib==6.3.2
+rdflib==7.1.1
 requests==2.28.2
 pandas==2.2.1
 morph_kgc==2.7.0
+memory_profiler==0.61.0
+pyshacl==0.29.0
 
 # HTTPX and OAuth authentication
 oauthlib==3.2.2
