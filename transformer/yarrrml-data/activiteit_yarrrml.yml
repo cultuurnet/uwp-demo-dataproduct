@@ -46,8 +46,14 @@ mappings:
       - [prov:atLocation, https://data.example.org/id/venue/exref/$(activiteit_location_id)~iri]
       - [cidoc:P14_carried_out_by, https://data.example.org/id/organizer/exref/$(activiteit_organizer_id)~iri]
       - [cidoc:P14_carried_out_by, https://data.example.org/id/performer/exref/$(activiteit_performer_id)~iri]
-
-
+      - p: cp:prijs
+        o:
+          - mapping: price
+            condition:
+              function: equal
+              parameters:
+                - [str1, $(activiteit_id)] # ID of activiteit in event source
+                - [str2, $(prijs_activiteitId)] # ID of activiteit in price source
 
   # Mapping for 'period' data
   period:
@@ -92,3 +98,33 @@ mappings:
       - [a, generiek:GestructureerdeIdentificator] 
       - [generiek:naamruimte, https://data.example.org/id/event/, xsd:string]
       - [generiek:lokaleIdentificator, exref/$(activiteit_id), xsd:string]
+  
+  # Mapping for event 'prijsinformatie' data
+  price:
+    sources:
+      - ['input-data/prijsinfo_mapping.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/graph/event/exref/$(prijs_activiteitId)
+    # Define subject URI
+    s: https://data.example.org/id/event/exref/$(prijs_activiteitId)#prijsInfo-$(prijs_id)
+    # Define predicate-object mappings
+    po:
+      - [a, schema:PriceSpecification] 
+      - [cp:prijscategorie, https://data.cultuurparticipatie.be/id/concept/PrijsCategorieType/$(prijscategorie)~iri]
+      - [skos:prefLabel, $(prijslabelNL), nl~lang]
+      - [skos:prefLabel, $(prijslabelFR), fr~lang]
+      - [schema:price, https://data.example.org/id/event/exref/$(prijs_activiteitId)#prijsInfo-$(prijs_id)-priceValue~iri]
+  
+  # Mapping for priceSpecification 'priceValue' data
+  priceValue:
+    sources:
+      - ['input-data/prijsinfo_mapping.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/graph/event/exref/$(prijs_activiteitId)
+    # Define subject URI
+    s: https://data.example.org/id/event/exref/$(prijs_activiteitId)#prijsInfo-$(prijs_id)-priceValue
+    # Define predicate-object mappings
+    po:
+      - [a, schema:MonetaryAmount]
+      - [schema:currency, $(prijs_currency), xsd:string]
+      - [schema:value, $(prijs_value), xsd:decimal]

@@ -517,6 +517,7 @@ uwps:PriceSpecificationShape
   sh:property [
     sh:path schema:price ;
     sh:class schema:MonetaryAmount ;
+    sh:nodeKind sh:BlankNodeOrIRI ;
     sh:maxCount 1
   ], [
     sh:path <https://data.vlaanderen.be/ns/cultuurparticipatie#Prijsinfo.prijscategorie> ;
