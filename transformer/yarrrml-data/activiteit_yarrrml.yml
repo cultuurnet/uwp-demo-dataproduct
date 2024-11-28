@@ -33,7 +33,6 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, cidoc:E7_Activity]
-#      - [a, cp:Deelname] # REMOVE THIS LINE, THIS ONE IS FOR TESTING ONLY.
       - [dcterms:created, $(activiteit_creationdate), xsd:dateTime]
       - [dcterms:modified, $(activiteit_modifieddate), xsd:dateTime]
       - [platform:verwerktOp, $(activiteit_processeddate), xsd:dateTime]
@@ -47,7 +46,9 @@ mappings:
       - [cidoc:P14_carried_out_by, https://data.example.org/id/organizer/exref/$(activiteit_organizer_id)~iri]
       - [cidoc:P14_carried_out_by, https://data.example.org/id/performer/exref/$(activiteit_performer_id)~iri]
       - [cp:Activiteit.locatieType, https://data.cultuurparticipatie.be/id/conceptscheme/Aanwezigheidsmodus/$(activiteit_locatietype)~iri]
-      - p: cp:prijs
+      - [cp:Activiteit.boeking, https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo~iri]
+      - [cp:Activiteit.beschikbaarheid, https://data.example.org/id/event/exref/$(activiteit_id)#beschikbaarheid~iri] 
+      - p: cp:prijs #TODO: is het niet cp:Activiteit.prijs ?
         o:
           - mapping: price
             condition:
@@ -129,3 +130,82 @@ mappings:
       - [a, schema:MonetaryAmount]
       - [schema:currency, $(prijs_currency), xsd:string]
       - [schema:value, $(prijs_value), xsd:decimal]
+
+  # Mapping for boekingsInfo
+  boekingsInfo:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    # Define subject URI
+    s: https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo
+    # Define predicate-object mappings
+    po:
+      - [a, cp:Boekingsinfo] 
+      - [schema:contactPoint, https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-contactPoint~iri]
+      - [cp:Boekingsinfo.beschikbaar, https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-period~iri]
+
+  #Mapping for 'boekingsinfo-contacpoint' data
+  boekingsInfo-contactPoint:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    # Define subject URI
+    s: https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-contactPoint
+    # Define predicate-object mappings
+    po:
+      - [a, schema:ContactPoint] 
+      - [schema:url, $(boeking_link), xsd:string]
+      - [schema:email, $(boeking_email), xsd:string]
+      - [schema:telephone, $(boeking_tel), xsd:string]
+
+  # Mapping for 'boekingsinfo-period' data
+  boekingsInfo-period:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    # Define subject mapping
+    s: https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-period
+    # Define predicate-object mappings
+    po:
+      - [a, m8g:PeriodOfTime] 
+      - [m8g:startTime, $(boeking_startDate), xsd:dateTime]
+      - [m8g:endTime, $(boeking_endDate), xsd:dateTime]
+
+  # Mapping for beschikbaarheid
+  beschikbaarheid:
+    sources:
+      - ['input-data/activiteit_results.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    # Define subject URI
+    s: https://data.example.org/id/event/exref/$(activiteit_id)#beschikbaarheid
+    # Define predicate-object mappings
+    po:
+      - [a, cp:Beschikbaarheid] 
+      - [platform:ticketBeschikbaarheid, https://schema.org/$(ticket_beschikbaarheid)] #NOTE: hier in praktijk dan soort van berekening maken in SQL-query om te zien hoeveel % tickets er nog zijn en op basis hiervan een label invullen (InStock/OutofStock/LimitedAvailability)?
+      - p: schema:hoursAvailable
+        o:
+          - mapping: openinghoursSpecification
+            condition:
+              function: equal
+              parameters:
+                - [str1, $(activiteit_id)] # ID of activiteit in event source
+                - [str2, $(beschikbaarheid_activiteit_id)] # ID of activiteit in beschikbaarheid source
+
+  # Mapping for openinghoursSpecification
+  openinghoursSpecification:
+    sources: 
+      - ['input-data/activiteit_beschikbaarheid_mapping.csv~csv']
+    # Define graph name
+    graph: https://data.example.org/graph/event/exref/$(beschikbaarheid_activiteit_id)
+    # Define subject URI
+    s: https://data.example.org/id/event/exref/$(beschikbaarheid_activiteit_id)#beschikbaarheid-$(beschikbaarheid_id)-openinghoursSpecification
+    # Define predicate-object mappings
+    po:
+      - [a, schema:OpeningHoursSpecification]
+      - [schema:dayOfWeek, https://schema.org/$(dayofweek)~iri]
+      - [schema:opens, $(openingsuur), xsd:string]
+      - [schema:closes, $(sluitingsuur), xsd:string]
