@@ -46,6 +46,7 @@ mappings:
       - [prov:atLocation, https://data.example.org/id/venue/exref/$(activiteit_location_id)~iri]
       - [cidoc:P14_carried_out_by, https://data.example.org/id/organizer/exref/$(activiteit_organizer_id)~iri]
       - [cidoc:P14_carried_out_by, https://data.example.org/id/performer/exref/$(activiteit_performer_id)~iri]
+      - [cp:Activiteit.locatieType, https://data.cultuurparticipatie.be/id/conceptscheme/Aanwezigheidsmodus/$(activiteit_locatietype)~iri]
       - p: cp:prijs
         o:
           - mapping: price
