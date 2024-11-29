@@ -48,7 +48,7 @@ mappings:
       - [cp:Activiteit.locatieType, https://data.cultuurparticipatie.be/id/conceptscheme/Aanwezigheidsmodus/$(activiteit_locatietype)~iri]
       - [cp:Activiteit.boeking, https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo~iri]
       - [cp:Activiteit.beschikbaarheid, https://data.example.org/id/event/exref/$(activiteit_id)#beschikbaarheid~iri] 
-      - p: cp:prijs #TODO: is het niet cp:Activiteit.prijs ?
+      - p: cp:Activiteit.prijs
         o:
           - mapping: price
             condition:
@@ -112,7 +112,7 @@ mappings:
     # Define predicate-object mappings
     po:
       - [a, schema:PriceSpecification] 
-      - [cp:prijscategorie, https://data.cultuurparticipatie.be/id/concept/PrijsCategorieType/$(prijscategorie)~iri]
+      - [cp:Prijs.prijscategorie, https://data.cultuurparticipatie.be/id/concept/PrijsCategorieType/$(prijscategorie)~iri]
       - [skos:prefLabel, $(prijslabelNL), nl~lang]
       - [skos:prefLabel, $(prijslabelFR), fr~lang]
       - [schema:price, https://data.example.org/id/event/exref/$(prijs_activiteitId)#prijsInfo-$(prijs_id)-priceValue~iri]
@@ -202,7 +202,7 @@ mappings:
     # Define graph name
     graph: https://data.example.org/graph/event/exref/$(beschikbaarheid_activiteit_id)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(beschikbaarheid_activiteit_id)#beschikbaarheid-$(beschikbaarheid_id)-openinghoursSpecification
+    s: https://data.example.org/id/event/exref/$(beschikbaarheid_activiteit_id)#beschikbaarheid-$(beschikbaarheid_id)-openinghours
     # Define predicate-object mappings
     po:
       - [a, schema:OpeningHoursSpecification]
