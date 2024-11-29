@@ -1,3 +1,3 @@
 prijs_id,prijs_activiteitId,prijscategorie,prijslabelNL,prijslabelFR,prijs_value,prijs_currency
-1,285c5de7-dda3-467f-945c-688162b8ef06,basis,Basistarief,Tarif de base,12.0,EUR
-2,285c5de7-dda3-467f-945c-688162b8ef06,tarief,museumpas,pass musées,0,EUR
+1,285c5de7,basis,Basistarief,Tarif de base,12.0,EUR
+2,285c5de7,tarief,museumpas,pass musées,0,EUR
