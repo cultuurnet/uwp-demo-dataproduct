@@ -21,16 +21,16 @@ mappings:
     sources:
       - ['input-data/participant_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/participant/exref/$(participant_id)
+    graph: https://data.example.org/graph/participant/$(participant_id)
     # Define subject mapping
-    s: https://data.example.org/id/participant/exref/$(participant_id)
+    s: https://data.example.org/id/participant/$(participant_id)
     # Define predicate-object mappings
     po:
       - [a, cp:Participant]
       - [dcterms:created, $(participant_creationdate), xsd:dateTime]
       - [dcterms:modified, $(participant_modifieddate), xsd:dateTime]
       - [platform:verwerktOp, $(participant_processeddate), xsd:dateTime]
-      - [adms:identifier, https://data.example.org/id/participant/exref/$(participant_id)#identifier]
+      - [adms:identifier, https://data.example.org/id/participant/$(participant_id)#identifier]
       - [platform:geboortejaar, $(participant_birthyear), xsd:gYear]
       - [platform:statistischeSectorId, $(participant_statsector_id), xsd:string]
       - [platform:statistischeSectorNaam, $(participant_statsector_name), xsd:string]
@@ -40,27 +40,27 @@ mappings:
     sources:
       - ['input-data/participant_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/participant/exref/$(participant_id)
+    graph: https://data.example.org/graph/participant/$(participant_id)
     # Define subject URI
-    s: https://data.example.org/id/participant/exref/$(participant_id)#identifier
+    s: https://data.example.org/id/participant/$(participant_id)#identifier
     # Define predicate-object mappings
     po:
       - [a, adms:Identifier] 
-      - [skos:notation, https://data.example.org/id/participant/exref/$(participant_id), xsd:anyURI]
+      - [skos:notation, https://data.example.org/id/participant/$(participant_id), xsd:anyURI]
       - [dcterms:creator, wegwijs:OVO003887~iri]
       - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
-      - [generiek:gestructureerdeIdentificator, https://data.example.org/id/participant/exref/$(participant_id)#gestructureerdeIdentificator]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/id/participant/$(participant_id)#gestructureerdeIdentificator]
 
   # Mapping for 'gestructureerdeIdentificator' data
   gestructureerdeIdentificator:
     sources:
       - ['input-data/participant_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/participant/exref/$(participant_id)
+    graph: https://data.example.org/graph/participant/$(participant_id)
     # Define subject URI
-    s: https://data.example.org/id/participant/exref/$(participant_id)#gestructureerdeIdentificator
+    s: https://data.example.org/id/participant/$(participant_id)#gestructureerdeIdentificator
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
       - [generiek:naamruimte, https://data.example.org/id/participant/, xsd:string]
-      - [generiek:lokaleIdentificator, exref/$(participant_id), xsd:string]
+      - [generiek:lokaleIdentificator, $(participant_id), xsd:string]

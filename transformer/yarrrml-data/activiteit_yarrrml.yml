@@ -27,9 +27,9 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject mapping
-    s: https://data.example.org/id/event/exref/$(activiteit_id)
+    s: https://data.example.org/id/event/$(activiteit_id)
     # Define predicate-object mappings
     po:
       - [a, cidoc:E7_Activity]
@@ -40,14 +40,14 @@ mappings:
       - [dcterms:description, $(activiteit_description_nl), nl~lang]
       - [dcterms:type, https://data.cultuurparticipatie.be/id/concept/ActiviteitType/$(activiteit_type)~iri]
       - [cp:thema, https://data.cultuurparticipatie.be/id/concept/ThemaType/$(activiteit_thema)~iri]
-      - [adms:identifier, https://data.example.org/id/event/exref/$(activiteit_id)#identifier~iri]
-      - [cidoc:P4_has_time-span, https://data.example.org/id/event/exref/$(activiteit_id)#period~iri]
-      - [prov:atLocation, https://data.example.org/id/venue/exref/$(activiteit_location_id)~iri]
-      - [cidoc:P14_carried_out_by, https://data.example.org/id/organizer/exref/$(activiteit_organizer_id)~iri]
-      - [cidoc:P14_carried_out_by, https://data.example.org/id/performer/exref/$(activiteit_performer_id)~iri]
+      - [adms:identifier, https://data.example.org/id/event/$(activiteit_id)#identifier~iri]
+      - [cidoc:P4_has_time-span, https://data.example.org/id/event/$(activiteit_id)#period~iri]
+      - [prov:atLocation, https://data.example.org/id/venue/$(activiteit_location_id)~iri]
+      - [cidoc:P14_carried_out_by, https://data.example.org/id/organizer/$(activiteit_organizer_id)~iri]
+      - [cidoc:P14_carried_out_by, https://data.example.org/id/performer/$(activiteit_performer_id)~iri]
       - [cp:Activiteit.locatieType, https://data.cultuurparticipatie.be/id/conceptscheme/Aanwezigheidsmodus/$(activiteit_locatietype)~iri]
-      - [cp:Activiteit.boeking, https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo~iri]
-      - [cp:Activiteit.beschikbaarheid, https://data.example.org/id/event/exref/$(activiteit_id)#beschikbaarheid~iri] 
+      - [cp:Activiteit.boeking, https://data.example.org/id/event/$(activiteit_id)#boekingsInfo~iri]
+      - [cp:Activiteit.beschikbaarheid, https://data.example.org/id/event/$(activiteit_id)#beschikbaarheid~iri] 
       - p: cp:Activiteit.prijs
         o:
           - mapping: price
@@ -62,9 +62,9 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject mapping
-    s: https://data.example.org/id/event/exref/$(activiteit_id)#period
+    s: https://data.example.org/id/event/$(activiteit_id)#period
     # Define predicate-object mappings
     po:
       - [a, m8g:PeriodOfTime] 
@@ -76,55 +76,55 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(activiteit_id)#identifier
+    s: https://data.example.org/id/event/$(activiteit_id)#identifier
     # Define predicate-object mappings
     po:
       - [a, adms:Identifier] 
-      - [skos:notation, https://data.example.org/id/event/exref/$(activiteit_id), xsd:anyURI]
+      - [skos:notation, https://data.example.org/id/event/$(activiteit_id), xsd:anyURI]
       - [dcterms:creator, wegwijs:OVO003887~iri]
       - [platform:bron, https://data.uitwisselingsplatform.be/id/dp-be-publiq-demo-demo-dataproduct~iri]
-      - [generiek:gestructureerdeIdentificator, https://data.example.org/id/event/exref/$(activiteit_id)#gestructureerdeIdentificator~iri]
+      - [generiek:gestructureerdeIdentificator, https://data.example.org/id/event/$(activiteit_id)#gestructureerdeIdentificator~iri]
 
   # Mapping for event 'gestructureerdeIdentificator' data
   gestructureerdeIdentificator:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(activiteit_id)#gestructureerdeIdentificator
+    s: https://data.example.org/id/event/$(activiteit_id)#gestructureerdeIdentificator
     # Define predicate-object mappings
     po:
       - [a, generiek:GestructureerdeIdentificator] 
       - [generiek:naamruimte, https://data.example.org/id/event/, xsd:string]
-      - [generiek:lokaleIdentificator, exref/$(activiteit_id), xsd:string]
+      - [generiek:lokaleIdentificator, $(activiteit_id), xsd:string]
   
   # Mapping for event 'prijsinformatie' data
   price:
     sources:
       - ['input-data/activiteit_prijsinfo_mapping.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(prijs_activiteitId)
+    graph: https://data.example.org/graph/event/$(prijs_activiteitId)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(prijs_activiteitId)#prijsInfo-$(prijs_id)
+    s: https://data.example.org/id/event/$(prijs_activiteitId)#prijsInfo-$(prijs_id)
     # Define predicate-object mappings
     po:
       - [a, schema:PriceSpecification] 
       - [cp:Prijs.prijscategorie, https://data.cultuurparticipatie.be/id/concept/PrijsCategorieType/$(prijscategorie)~iri]
       - [skos:prefLabel, $(prijslabelNL), nl~lang]
       - [skos:prefLabel, $(prijslabelFR), fr~lang]
-      - [schema:price, https://data.example.org/id/event/exref/$(prijs_activiteitId)#prijsInfo-$(prijs_id)-priceValue~iri]
+      - [schema:price, https://data.example.org/id/event/$(prijs_activiteitId)#prijsInfo-$(prijs_id)-priceValue~iri]
   
   # Mapping for priceSpecification 'priceValue' data
   priceValue:
     sources:
       - ['input-data/activiteit_prijsinfo_mapping.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(prijs_activiteitId)
+    graph: https://data.example.org/graph/event/$(prijs_activiteitId)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(prijs_activiteitId)#prijsInfo-$(prijs_id)-priceValue
+    s: https://data.example.org/id/event/$(prijs_activiteitId)#prijsInfo-$(prijs_id)-priceValue
     # Define predicate-object mappings
     po:
       - [a, schema:MonetaryAmount]
@@ -136,23 +136,23 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo
+    s: https://data.example.org/id/event/$(activiteit_id)#boekingsInfo
     # Define predicate-object mappings
     po:
       - [a, cp:Boekingsinfo] 
-      - [schema:contactPoint, https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-contactPoint~iri]
-      - [cp:Boekingsinfo.beschikbaar, https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-period~iri]
+      - [schema:contactPoint, https://data.example.org/id/event/$(activiteit_id)#boekingsInfo-contactPoint~iri]
+      - [cp:Boekingsinfo.beschikbaar, https://data.example.org/id/event/$(activiteit_id)#boekingsInfo-period~iri]
 
   #Mapping for 'boekingsinfo-contacpoint' data
   boekingsInfo-contactPoint:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-contactPoint
+    s: https://data.example.org/id/event/$(activiteit_id)#boekingsInfo-contactPoint
     # Define predicate-object mappings
     po:
       - [a, schema:ContactPoint] 
@@ -165,9 +165,9 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject mapping
-    s: https://data.example.org/id/event/exref/$(activiteit_id)#boekingsInfo-period
+    s: https://data.example.org/id/event/$(activiteit_id)#boekingsInfo-period
     # Define predicate-object mappings
     po:
       - [a, m8g:PeriodOfTime] 
@@ -179,9 +179,9 @@ mappings:
     sources:
       - ['input-data/activiteit_results.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(activiteit_id)
+    graph: https://data.example.org/graph/event/$(activiteit_id)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(activiteit_id)#beschikbaarheid
+    s: https://data.example.org/id/event/$(activiteit_id)#beschikbaarheid
     # Define predicate-object mappings
     po:
       - [a, cp:Beschikbaarheid] 
@@ -200,9 +200,9 @@ mappings:
     sources: 
       - ['input-data/activiteit_beschikbaarheid_mapping.csv~csv']
     # Define graph name
-    graph: https://data.example.org/graph/event/exref/$(beschikbaarheid_activiteit_id)
+    graph: https://data.example.org/graph/event/$(beschikbaarheid_activiteit_id)
     # Define subject URI
-    s: https://data.example.org/id/event/exref/$(beschikbaarheid_activiteit_id)#beschikbaarheid-$(beschikbaarheid_id)-openinghours
+    s: https://data.example.org/id/event/$(beschikbaarheid_activiteit_id)#beschikbaarheid-$(beschikbaarheid_id)-openinghours
     # Define predicate-object mappings
     po:
       - [a, schema:OpeningHoursSpecification]
