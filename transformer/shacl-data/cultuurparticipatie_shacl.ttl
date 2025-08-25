@@ -1,13 +1,14 @@
 ####
-# Deze SHACL file is gebaseerd op de SHACL Template van het OSLO Applicatieprofiel Cultuurparticipatie
+# Deze SHACL file is gebaseerd op de SHACL Template van het OSLO Applicatieprofiel Cultuurparticipatie en is onderhevig aan frequente wijzigingen
 # Versie: https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/erkendestandaard/2024-09-11/shacl/DoelgerichtDigitaalTransformeren-ap-SHACL.ttl
-# In deze file werden verschillende aanpassingen doorgevoerd, die steeds met comments aangeduid werden:
-# * Dubbele shapes voor dezelfde property: alle te valideren eigenschappen werden samengevoegd in 1 shape en de duplicaten gedeactiveerd. Zie ook https://github.com/Informatievlaanderen/OSLOthema-DoelgerichtDigitaalTransformeren/issues/45
+# In deze file worden verschillende aanpassingen doorgevoerd, steeds met comments aangeduid, om te conformeren aan de werking van het UiTwisselingsplatform.be (UWP):
+# * Dubbele shapes voor dezelfde property: alle te valideren eigenschappen samengevoegd in 1 shape en de duplicaten gedeactiveerd. Zie ook https://github.com/Informatievlaanderen/OSLOthema-DoelgerichtDigitaalTransformeren/issues/45
 # ** Enkel de shapes die actief gebruikt worden binnen het UWP zijn hierop aangepast, verschillende shapes bevatten nog steeds duplicate properties die niet gemerged werden
 # * alle verwijzingen naar schema.org gebruiken de https versie van de URI. Zie ook https://github.com/Informatievlaanderen/OSLOthema-DoelgerichtDigitaalTransformeren/issues/43
 # * fouten in URIs aangepast: https ipv http, ontbrekende www,... Zie ook https://github.com/Informatievlaanderen/OSLOthema-DoelgerichtDigitaalTransformeren/issues/44
-# * properties aan shapes toegevoegd die van belang zijn voor de werking van het UiTwisselingsplatform (UWP): created, modified, verwerktOp, Identificator.bron,...
-# ** deze properties kregen een URI binnen de volgende DRAFT namespace "https://data.uitwisselingsplatform.be/doc/implementatieprofiel/2025-08-21#"
+# * properties aan shapes toegevoegd die van belang zijn voor de werking van het UWP: created, modified, verwerktOp, Identificator.bron,...
+# * nieuwe shapes toegevoegd die van belang zijn voor de werking van het UWP: AddressShape, GeometryShape, VirtualLocationShape...
+# ** deze shapes en properties kregen een URI binnen de volgende (tijdelijke) namespace "https://data.uitwisselingsplatform.be/doc/implementatieprofiel/2025-08-21#"
 # * Class validatie gedeactiveerd wanneer deze niet geverifieerd kan worden: voor het verwijzen naar concepten of externe entiteiten wordt vaak enkel de URI meegegeven, de targetClass van deze URI kan in dat geval niet geverifieerd worden
 ####
 
