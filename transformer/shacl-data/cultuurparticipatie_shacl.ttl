@@ -295,7 +295,7 @@
   shacl:path crm:P32_used_general_technique .
 
 <https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/erkendestandaard/2024-09-11#ActiviteitShape/421d78c27acf98a3c52191db36ac97de764ae8b5> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/erkendestandaard/2024-09-11#Activiteit.locatie";
-  shacl:Class dc:Location ; # EDIT : added properties for UWP validation
+  shacl:class dc:Location ; # EDIT : added properties for UWP validation
   shacl:description "Aanduiding van een geografische positie, dmv coordinaten, een toponiem, een adreslabel, een verwijzing naar een plaats/regio of verwijzing naar een adres."@nl;
   shacl:maxCount 1;
   shacl:name "locatie"@nl;
