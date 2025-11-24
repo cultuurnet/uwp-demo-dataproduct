@@ -1,9 +1,16 @@
 # Table of Contents
 - [Main Script](#main-script)
 	- [Features](#features)
+	- [Transformation Pipeline Pattern](#transformation-pipeline-pattern)
 	- [Usage](#usage)
 	- [Example Usage](#example-usage)
+	- [Configuration](#configuration)
+	- [Logging](#logging)
 	- [Dependencies](#dependencies)
+- [Python Version Check](#python-version-check)
+	- [Features](#features-python)
+	- [Usage](#usage-python)
+	- [Dependencies](#dependencies-python)
 - [Fuseki Client](#fuseki-client)
 	- [Features](#features-1)
 	- [Usage](#usage-1)
@@ -25,6 +32,7 @@
 	- [Features](#features-3)
 	- [Usage](#usage-3)
 		- [RDF Graph Generation](#rdf-graph-generation)
+		- [SHACL Validation](#shacl-validation)
 	- [Example Usage](#example-usage-3)
 	- [Dependencies](#dependencies-3)
 - [CSV Utilities](#csv-utilities)
@@ -36,36 +44,117 @@
   
 # Main Script
 
-The `main.py` script orchestrates the process of pushing data to a Fuseki server after transforming and processing it.
+The `main.py` script orchestrates the process of transforming CSV data to RDF and loading it into Fuseki. It demonstrates the standard transformation pipeline pattern used across data products in the platform.
 
 ## Features
 
-- **Push Data to Fuseki**: It pushes data to the Fuseki server by performing the following steps:
-    1. **Retrieve Latest Modified Date**: Finds the latest modified date in the Fuseki database using the `get_latest_fuseki_update` function from the `fuseki_date_extraction` module.
-    2. **Compare Input Data**: Compares the input data (CSV file) with the latest modified date to determine if there are new entities to process.
-    3. **Generate RDF Graph**: Generates an RDF graph (N-Quads) from the CSV data using the YARRRML mapping files with the `generate_rdf_graph` function from the `rdf_utils` module.
-    4. **Clear Existing Graphs**: Clears existing named entity graphs in the Fuseki server using the `clear_graphs` method of the `FusekiClient` class from the `fuseki_client` module.
-    5. **Load RDF Graph**: Loads the generated RDF graph (N-Quads) into the Fuseki server using the `load_store` method of the `FusekiClient` class.
+- **Python Version Validation**: Checks Python version compatibility with Paketo buildpack before processing
+- **Data-Driven Configuration**: Entity types configured in `ENTITY_CONFIGURATIONS` list for easy extension
+- **Incremental Updates**: Only processes new/changed data by comparing timestamps
+- **Multi-CSV Support**: Handles YARRRML mappings that reference multiple CSV files
+- **SHACL Validation**: Validates RDF data against SHACL shapes before loading
+- **Structured Logging**: Comprehensive logging with timestamps and progress tracking
+- **Error Handling**: Graceful error handling with clear error messages
+- **Resource Management**: Proper cleanup of Fuseki client connections
+
+## Transformation Pipeline Pattern
+
+The script follows a standardized transformation pipeline pattern:
+
+1. **Python Version Check**: Validates Python version compatibility with buildpack (prevents build failures)
+2. **For each entity type**:
+   - **Get Latest Modification Date**: Retrieves the latest modified date from Fuseki using `get_latest_fuseki_update`
+   - **Check for New Data**: Compares input CSV timestamps with Fuseki date to determine if processing is needed
+   - **Generate RDF Graph**: Creates RDF graph (N-Quads) from CSV using YARRRML mappings via `generate_conjunctive_graph`
+   - **Validate RDF**: Validates generated RDF against SHACL shapes using `validate_per_graph`
+   - **Clear Existing Graphs**: Removes existing named graphs for the entity type
+   - **Load RDF Graph**: Loads the validated RDF graph into Fuseki
+
+This pattern ensures:
+- **Incremental updates**: Only processes new/changed data, improving efficiency
+- **Data quality**: SHACL validation prevents invalid data from being loaded
+- **Graph isolation**: Each entity type has its own named graph
+
+> **Note on SHACL Validation**: SHACL validation is useful during development to catch data quality issues early. However, it can significantly slow down transformation runs in production. Consider disabling SHACL validation in production environments if performance is critical, or use it selectively for specific entity types.
 
 ## Usage
 
-1. Ensure that the required dependencies and modules (`fuseki_client`, `fuseki_date_extraction`, `rdf_utils`, `csv_utils`, `constants`) are available in the project directory.
-2. Run the `main.py` script.
+1. Ensure all required dependencies are installed (see `requirements.txt`)
+2. Configure entity types in `ENTITY_CONFIGURATIONS` if needed
+3. Ensure input CSV files are in `input-data/` directory
+4. Ensure YARRRML mapping files are in `yarrrml-data/` directory
+5. Ensure SHACL validation file is in `shacl-data/` directory
+6. Run the script
 
 ## Example Usage
-Run the main.py script using the CLI tool with:
+
+Run the main.py script using the CLI tool:
 ```bash
 dp run
 ```
 
+Or run directly:
+```bash
+python transformer/main.py
+```
+
+## Configuration
+
+### Entity Types Configuration
+
+Entity types are configured in the `ENTITY_CONFIGURATIONS` list, making it easy to add or remove entity types:
+
+```python
+ENTITY_CONFIGURATIONS = [
+    (LOCATIE_TYPE, QUERY_LATEST_LOCATIE_DATE),
+    (ACTIVITEIT_TYPE, QUERY_LATEST_ACTIVITEIT_DATE),
+    (DEELNAME_TYPE, QUERY_LATEST_DEELNAME_DATE),
+    # Add more entity types here
+]
+```
+
+### Path Configuration
+
+Paths are automatically resolved relative to the transformer directory:
+- `input-data/`: Input CSV files
+- `yarrrml-data/`: YARRRML mapping files
+- `shacl-data/`: SHACL validation files
+
+### Multi-CSV YARRRML Mappings
+
+When YARRRML mappings reference multiple CSV files (e.g., `activiteit_results.csv`, `activiteit_prijsinfo_mapping.csv`), the script handles them automatically. The YARRRML file specifies the paths, and morph-kgc resolves them correctly.
+
+**Important**: Do not set `file_path` in the morph-kgc config when using multi-CSV mappings, as it would override all source paths.
+
+## Logging
+
+The script uses structured logging with timestamps:
+
+- **Format**: `YYYY-MM-DD HH:MM:SS - logger_name - LEVEL - message`
+- **Entity Type Prefixes**: All entity-specific logs are prefixed with `[ENTITY_TYPE]`
+- **Progress Indicators**: Shows step progress (e.g., `Step 1/4`, `Step 2/4`)
+- **Visual Indicators**: Uses `✓` for success and `✗` for failures
+- **Summary**: Provides summary statistics at the end
+
+Example log output:
+```
+2025-11-24 14:50:33 - __main__ - INFO - [ACTIVITEIT] Starting processing
+2025-11-24 14:50:33 - __main__ - INFO - [ACTIVITEIT] Step 1/4: Generating RDF graph from CSV...
+2025-11-24 14:50:33 - __main__ - INFO - [ACTIVITEIT] ✓ Generated 1,234 triples
+```
+
 ## Dependencies
 
-- `logging`: Standard library module for logging.
-- `FusekiClient`: Custom client class for interacting with the Fuseki server.
-- `get_latest_fuseki_update`: Function for retrieving the latest modified date from the Fuseki database for each specific entity type.
-- `generate_rdf_graph`: Function for generating an RDF graph from CSV data.
-- `compare_input_with_latest_date`: Function for comparing input data timestamps with the latest modified date in Fuseki.
-- `constants`: Module containing constant values used in the script.
+- `logging`: Standard library module for logging (with timestamp formatting)
+- `pathlib.Path`: Standard library for path handling
+- `rdflib.Graph`: RDF graph manipulation
+- `FusekiClient`: Custom client class for interacting with Fuseki server
+- `get_latest_fuseki_update`: Function for retrieving latest modified date from Fuseki
+- `generate_conjunctive_graph`: Function for generating RDF graph from CSV using YARRRML
+- `validate_per_graph`: Function for SHACL validation
+- `compare_input_date_with_latest_date`: Function for comparing CSV timestamps with Fuseki date
+- `check_python_version`: Function for Python version buildpack validation
+- `constants`: Module containing constant values (entity types, port names)
 
 # Fuseki Client
 
@@ -135,6 +224,33 @@ client.load_store(graph)
 - `dateutil`: Library for parsing ISO 8601 timestamps.
 - `tools`: Custom tools module for environment variable retrieval.
 
+# Python Version Check
+
+The `python_version_check.py` module validates that the Python version specified in `.python-version` is supported by the Paketo buildpack before processing begins.
+
+## Features
+
+- **Buildpack Compatibility Check**: Queries Paketo buildpack to verify Python version support
+- **Early Failure Detection**: Catches version incompatibilities before build/deployment
+- **Caching**: Caches supported versions to reduce API calls
+- **Clear Warnings**: Provides actionable error messages with fix instructions
+
+## Usage
+
+The check runs automatically at the start of `main.py` before any transformation code executes. It reads the Python version from `.python-version` and validates it against supported versions from the Paketo buildpack.
+
+If the version is not supported, a warning is logged with:
+- The specified version
+- List of supported versions
+- Instructions to fix (delete venv, update .python-version)
+
+## Dependencies
+
+- `urllib`: Standard library for HTTP requests
+- `json`: Standard library for JSON parsing
+- `pathlib`: Standard library for path handling
+- `logging`: Standard library for logging
+
 # Fuseki Date Extraction
 
 The `fuseki_date_extraction.py` module provides functions for extracting and transforming datetime values from a Fuseki database. It includes methods to connect to the database, retrieve the latest update datetime, and handle datetime transformations.
@@ -182,64 +298,119 @@ print(f"Latest update datetime: {latest_date}")
 
 # RDF Utilities
 
-The `rdf_utils.py` module provides the function for generating RDF graphs using morph-kgc mapping engine.
+The `rdf_utils.py` module provides functions for generating RDF graphs using the morph-kgc mapping engine and validating them against SHACL shapes.
 
 ## Features
 
-- **RDF Graph Generation**: Generates an RDF graph from a configuration file using the `morph_kgc` library.
+- **RDF Graph Generation**: Generates a conjunctive RDF graph (N-Quads) from CSV data using YARRRML mappings
+- **SHACL Validation**: Validates RDF graphs against SHACL shapes on a per-graph basis
+- **Memory Management**: Includes memory profiling capabilities
 
 ## Usage
 
-To use the functions in `rdf_utils.py`, you need to provide input files or configuration details as required. Then, you can call the functions to perform the desired RDF-related operations.
+To use the functions in `rdf_utils.py`, you need to provide a morph-kgc configuration string (INI format) that specifies the YARRRML mapping file. The function will generate an RDF graph from the CSV data.
 
 ### RDF Graph Generation
 
-The `generate_rdf_graph` function generates an RDF graph based on the provided configuration file path. It utilizes the `morph_kgc` library for materializing the RDF graph.
+The `generate_conjunctive_graph` function generates a conjunctive RDF graph (N-Quads format) based on the provided configuration string. It utilizes the `morph_kgc` library for materializing the RDF graph.
+
+**Configuration Format**:
+```ini
+[CONFIGURATION]
+output_format=N-QUADS
+
+[DataSource1]
+mappings=yarrrml-data/entity_yarrrml.yml
+```
+
+**Important**: When YARRRML mappings reference multiple CSV files, do not set `file_path` in the config, as it would override all source paths specified in the YARRRML file.
+
+### SHACL Validation
+
+The `validate_per_graph` function validates each named graph in a conjunctive graph against SHACL shapes. This provides faster validation than validating the entire graph at once.
+
+> **Performance Note**: SHACL validation can be useful during development to catch data quality issues early. However, it can significantly slow down transformation runs in production, especially for large datasets. Consider disabling SHACL validation in production environments if performance is critical, or use it selectively for specific entity types during development and testing phases.
 
 ## Example Usage
 
 ```python
-from tools.rdf_utils import generate_rdf_graph
+from tools.rdf_utils import generate_conjunctive_graph, validate_per_graph
+from rdflib import Graph
+
+# Build morph-kgc configuration
+config_ini = """[CONFIGURATION]
+output_format=N-QUADS
+
+[DataSource1]
+mappings=yarrrml-data/activiteit_yarrrml.yml
+"""
 
 # Generate RDF graph
-config_ini_path = "config.ini"
-rdf_graph = generate_rdf_graph(config_ini_path)
-print("RDF graph generated successfully.")
+graph_store = generate_conjunctive_graph(config_ini)
+print(f"Generated {len(graph_store)} triples")
+
+# Load SHACL shapes
+shacl_graph = Graph()
+shacl_graph.parse("shacl-data/cultuurparticipatie_shacl.ttl", format="turtle")
+
+# Validate
+is_valid, _, failure_reason = validate_per_graph(graph_store, shacl_graph)
+if is_valid:
+    print("SHACL validation passed")
+else:
+    print(f"SHACL validation failed: {failure_reason}")
 ```
 
 ## Dependencies
 
-- `logging`: Standard library module for logging messages.
-- `morph_kgc`: External library for generating RDF graphs.
+- `logging`: Standard library module for logging messages
+- `morph_kgc`: External library for generating RDF graphs from YARRRML mappings
+- `rdflib.ConjunctiveGraph`: For handling N-Quads format
+- `pyshacl`: For SHACL validation
+- `memory_profiler`: For memory profiling (optional)
 
 # CSV Utilities
 
-The `csv_utils.py` module provides functions for working with the demo input CSV file, including comparing timestamps in a CSV file with a given latest date. This is used to introduce a break condition in the transformation code
+The `csv_utils.py` module provides functions for comparing timestamps in CSV files with the latest date stored in Fuseki. This is used to determine if new data needs to be processed (incremental update pattern).
 
 ## Features
 
-- **Compare Timestamps with Latest Date**: Compares timestamps in a CSV file with a provided latest date and stops execution if the timestamp is less than or equal to the latest date.
+- **Timestamp Comparison**: Compares modification timestamps in CSV files with the latest date in Fuseki
+- **Incremental Processing**: Returns `True` if all data is already processed (stop condition), `False` if new data exists
+- **Entity Type Support**: Works with any entity type by using dynamic column names
 
 ## Usage
 
-You can use the `compare_input_with_latest_date` function to compare timestamps in a CSV file with a given latest date. This function reads the CSV file located at the specified path and compares the `location_modified` timestamps with the latest date. If any timestamp is less than or equal to the latest date, the function stops execution.
+The `compare_input_date_with_latest_date` function reads a CSV file and checks if any rows have modification dates newer than the latest date in Fuseki. This determines whether processing should continue or stop.
+
+**Function Behavior**:
+- Returns `True` if all timestamps in CSV are <= latest_date (all data already processed - stop condition)
+- Returns `False` if any timestamp in CSV is > latest_date (new data exists - continue processing)
+
+**Column Naming Convention**:
+The function expects a column named `{data_type}_modifieddate` (e.g., `locatie_modifieddate`, `activiteit_modifieddate`).
 
 ## Example Usage
 
 ```python
-from tools.csv_utils import compare_input_with_latest_date
+from tools.csv_utils import compare_input_date_with_latest_date
+from datetime import datetime
 
-# Specify the path to the CSV file and the latest date
-output_csv_path = "output.csv"
-latest_date = "2024-03-05T17:52:18+00:00"
+# Specify the path to the CSV file, latest date, and entity type
+csv_path = "input-data/activiteit_results.csv"
+latest_date = datetime.fromisoformat("2024-03-05T17:52:18+00:00")
+data_type = "activiteit"
 
-# Compare timestamps with the latest date
-compare_input_with_latest_date(output_csv_path, latest_date)
+# Check if new data exists
+all_processed = compare_input_date_with_latest_date(csv_path, latest_date, data_type)
+
+if all_processed:
+    print("All data already processed")
+else:
+    print("New data found, processing...")
 ```
 
 ## Dependencies
 
-- `csv`: Standard library module for reading and writing CSV files.
-- `sys`: Standard library module for system-specific parameters and functions.
-- `datetime`: Standard library module for manipulating dates and times.
-- `timezone`: Standard library module for dealing with timezones.
+- `csv`: Standard library module for reading CSV files
+- `datetime`: Standard library module for manipulating dates and times
