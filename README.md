@@ -1,11 +1,5 @@
 # demo data product
 
-<p align="center">
-  <a href="https://gitpod.io/#FILL_IN_YOUR_REPOSITORY_URL">
-    <img src="https://img.shields.io/badge/Gitpod-ready--to--code-908a85?logo=gitpod" alt="Gitpod ready-to-code" />
-  </a>
-</p>
-
 ## Algemene info
 
 Dit demo dataproduct wordt gebruikt in de [Data Product developer onboarding documentatie](https://uitwisselingsplatform.atlassian.net/wiki/spaces/DDTC/pages/380076045/Demo+dataproduct+opzetten) van het UiTwisselingsplatform.
