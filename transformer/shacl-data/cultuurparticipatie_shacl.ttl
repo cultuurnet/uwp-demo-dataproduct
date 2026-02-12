@@ -2904,12 +2904,14 @@
   shacl:targetClass <http://www.w3.org/ns/locn#Geometry> .
 
 <https://data.uitwisselingsplatform.be/doc/implementatieprofiel/2025-08-21#GeometryShape/1>
-  shacl:datatype <http://www.opengis.net/ont/geosparql#gmlLiteral> ;
+  #shacl:datatype <http://www.opengis.net/ont/geosparql#gmlLiteral> ;
+  # temporary commented out gmlLiteral datatype validation because fuseki's shacl engine does not support custom datatypes .
   shacl:maxCount 1 ;
   shacl:path <http://www.opengis.net/ont/geosparql#asGML> .
 
 <https://data.uitwisselingsplatform.be/doc/implementatieprofiel/2025-08-21#GeometryShape/2>
-  shacl:datatype <http://www.opengis.net/ont/geosparql#wktLiteral> ;
+  #shacl:datatype <http://www.opengis.net/ont/geosparql#wktLiteral> ;
+  # temporary commented out wktLiteral datatype validation because fuseki's shacl engine does not support custom datatypes .
   shacl:maxCount 1 ;
   shacl:path <http://www.opengis.net/ont/geosparql#asWKT> .
 
