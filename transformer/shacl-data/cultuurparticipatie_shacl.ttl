@@ -295,7 +295,7 @@
   shacl:path crm:P32_used_general_technique .
 
 <https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/erkendestandaard/2024-09-11#ActiviteitShape/421d78c27acf98a3c52191db36ac97de764ae8b5> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/erkendestandaard/2024-09-11#Activiteit.locatie";
-  shacl:class dc:Location ; # EDIT : added properties for UWP validation
+  # shacl:class dc:Location ; # temporarily commented out: URI-only location references cannot validate class
   shacl:description "Aanduiding van een geografische positie, dmv coordinaten, een toponiem, een adreslabel, een verwijzing naar een plaats/regio of verwijzing naar een adres."@nl;
   shacl:maxCount 1;
   shacl:name "locatie"@nl;
@@ -2428,7 +2428,7 @@
   shacl:path <http://www.cidoc-crm.org/cidoc-crm/P160_has_temporal_projection> . # Updated path URI from <https://cidoc-crm.org/html/cidoc_crm_v7.1.2.html#P160>  to correct cidoc URI
 
 <https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/erkendestandaard/2024-09-11#RuimtetijdShape/634c9034242d42f92452dc2ddbbe2a5f49265cbd> rdfs:seeAlso "https://data.vlaanderen.be/doc/applicatieprofiel/cultuurparticipatie/erkendestandaard/2024-09-11#Ruimtetijd.locatie";
-  shacl:class dc:Location ; # Updated class to DC:Location for UWP Compliance
+  # shacl:class dc:Location ; # temporarily commented out: URI-only location references cannot validate class
   shacl:description "Aanduiding van een geografische positie, dmv coordinaten, een toponiem, een adreslabel, een verwijzing naar een plaats/regio of verwijzing naar een adres."@nl;
   shacl:name "locatie"@nl;
   shacl:maxCount 1 ; # Added property for UWP Compliance
